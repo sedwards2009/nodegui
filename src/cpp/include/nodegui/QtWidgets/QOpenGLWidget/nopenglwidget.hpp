@@ -15,19 +15,28 @@ class DLL_EXPORT NOpenGLWidget : public QOpenGLWidget, public NodeWidget {
 
   void connectSignalsToEventEmitter() {
     QWIDGET_SIGNALS
-  //   QObject::connect(this, &QLabel::linkActivated, [=](const QString& link) {
-  //     Napi::Env env = this->emitOnNode.Env();
-  //     Napi::HandleScope scope(env);
-  //     this->emitOnNode.Call({Napi::String::New(env, "linkActivated"),
-  //                            Napi::String::New(env, link.toStdString())});
-  //   });
-  //   QObject::connect(this, &QLabel::linkHovered, [=](const QString& link) {
-  //     Napi::Env env = this->emitOnNode.Env();
-  //     Napi::HandleScope scope(env);
-  //     this->emitOnNode.Call({Napi::String::New(env, "linkHovered"),
-  //                            Napi::String::New(env, link.toStdString())});
-  //   });
+    QObject::connect(this, &QOpenGLWidget::aboutToCompose, [=]() {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "aboutToCompose")});
+    });
+    QObject::connect(this, &QOpenGLWidget::aboutToResize, [=]() {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "aboutToResize")});
+    });
+    QObject::connect(this, &QOpenGLWidget::frameSwapped, [=]() {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "frameSwapped")});
+    });
+    QObject::connect(this, &QOpenGLWidget::resized, [=]() {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "resized")});
+    });
   }
+
  protected:
   virtual void initializeGL() override {
     Napi::Env env = this->emitOnNode.Env();
