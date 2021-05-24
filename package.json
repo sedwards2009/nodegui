@@ -20,6 +20,7 @@
         "setupqt": "cross-env node ./scripts/setupMiniQt.js",
         "build:addon": "cross-env CMAKE_BUILD_PARALLEL_LEVEL=8 cmake-js compile",
         "test": "node ./scripts/qode.js ./node_modules/jest/bin/jest -i",
+        "dev:opengl": "cross-env npm run build && node ./scripts/qode.js dist/opengl_demo.js",
         "lint:cpp": "cross-env clang-format -i --glob=src/cpp/**/*.[h,c]*",
         "lint:ts": "cross-env tsc --noEmit && cross-env eslint './src/**/*.{ts,tsx,js,jsx}' --fix",
         "docs": "cross-env typedoc && node ./website/docs/scripts/fixdocs.js",

@@ -125,6 +125,9 @@ export {
     QTextEditLineWrapMode,
     WrapMode,
 } from './lib/QtWidgets/QTextEdit';
+
+export { QOpenGLWidget } from './lib/QtWidgets/QOpenGLWidget';
+
 // Core
 export { QDate } from './lib/QtCore/QDate';
 export { QDateTime } from './lib/QtCore/QDateTime';

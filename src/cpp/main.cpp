@@ -73,6 +73,7 @@
 #include "QtWidgets/QMenu/qmenu_wrap.h"
 #include "QtWidgets/QMenuBar/qmenubar_wrap.h"
 #include "QtWidgets/QMessageBox/qmessagebox_wrap.h"
+#include "QtWidgets/QOpenGLWidget/qopenglwidget_wrap.h"
 #include "QtWidgets/QPainter/qpainter_wrap.h"
 #include "QtWidgets/QPainterPath/qpainterpath_wrap.h"
 #include "QtWidgets/QPlainTextEdit/qplaintextedit_wrap.h"
@@ -216,6 +217,7 @@ Napi::Object Main(Napi::Env env, Napi::Object exports) {
   QStandardItemWrap::init(env, exports);
   QSvgWidgetWrap::init(env, exports);
   QDesktopWidgetWrap::init(env, exports);
+  QOpenGLWidgetWrap::init(env, exports);
   return exports;
 }
 
