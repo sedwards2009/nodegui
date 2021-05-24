@@ -10,6 +10,9 @@ import { NativeElement } from '../core/Component';
 
 A `QOpenGLWidget` provides ability to render its contents using OpenGL.
 
+Unlike the C++ API, this class should not be subclassed. Instead listen to the `initializeGL`, `paintGL`, and
+`resizeGL` events and perform your work there.
+
  */
 export class QOpenGLWidget extends NodeWidget<QOpenGLWidgetSignals> {
     native: NativeElement;
@@ -136,4 +139,7 @@ export class QOpenGLWidget extends NodeWidget<QOpenGLWidgetSignals> {
 }
 
 export interface QOpenGLWidgetSignals extends QWidgetSignals {
+  initializeGL: () => void;
+  paintGL: () => void;
+  resizeGL: (w: number, h: number) => void;
 }

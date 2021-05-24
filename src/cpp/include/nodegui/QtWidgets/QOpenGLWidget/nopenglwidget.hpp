@@ -28,4 +28,24 @@ class DLL_EXPORT NOpenGLWidget : public QOpenGLWidget, public NodeWidget {
   //                            Napi::String::New(env, link.toStdString())});
   //   });
   }
+ protected:
+  virtual void initializeGL() override {
+    Napi::Env env = this->emitOnNode.Env();
+    Napi::HandleScope scope(env);
+    this->emitOnNode.Call({Napi::String::New(env, "initializeGL")});
+  }
+
+  virtual void paintGL() override {
+    Napi::Env env = this->emitOnNode.Env();
+    Napi::HandleScope scope(env);
+    this->emitOnNode.Call({Napi::String::New(env, "paintGL")});
+  }
+
+  virtual void resizeGL(int w, int h) override {
+    Napi::Env env = this->emitOnNode.Env();
+    Napi::HandleScope scope(env);
+    this->emitOnNode.Call({Napi::String::New(env, "resizeGL"),
+                           Napi::Number::New(env, w),
+                           Napi::Number::New(env, h)});
+  }
 };

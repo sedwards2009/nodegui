@@ -16,7 +16,19 @@ const messageLabel = new QLabel();
 messageLabel.setText("OpenGL test");
 gridLayout.addWidget(messageLabel, 0, 0);
 
+console.log("Starting up");
+
 const openGLWidget = new QOpenGLWidget();
+openGLWidget.addEventListener("initializeGL", () => {
+    console.log("initializeGL received");
+});
+openGLWidget.addEventListener("paintGL", () => {
+    console.log("paintGL received");
+});
+openGLWidget.addEventListener("resizeGL", (w, h) => {
+    console.log(`resizeGL received w: ${w} h: ${h}`);
+});
+
 gridLayout.addWidget(openGLWidget, 1, 0);
 
 win.setCentralWidget(centralWidget);
