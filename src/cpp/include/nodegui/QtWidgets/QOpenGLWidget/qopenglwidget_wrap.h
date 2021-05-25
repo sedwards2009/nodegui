@@ -21,6 +21,8 @@ class DLL_EXPORT QOpenGLWidgetWrap : public Napi::ObjectWrap<QOpenGLWidgetWrap> 
   // class constructor
   static Napi::FunctionReference constructor;
   // wrapped methods
+
+  
   // Napi::Value setSelection(const Napi::CallbackInfo& info);
   // Napi::Value selectionStart(const Napi::CallbackInfo& info);
   // Napi::Value setBuddy(const Napi::CallbackInfo& info);

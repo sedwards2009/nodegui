@@ -39,6 +39,7 @@
 #include "QtGui/QPen/qpen_wrap.h"
 #include "QtGui/QPicture/qpicture_wrap.h"
 #include "QtGui/QPixmap/qpixmap_wrap.h"
+#include "QtGui/QOpenGLContext/qopenglcontext_wrap.h"
 #include "QtGui/QStyle/qstyle_wrap.h"
 #include "QtWidgets/QAction/qaction_wrap.h"
 #include "QtWidgets/QBoxLayout/qboxlayout_wrap.h"
@@ -218,6 +219,7 @@ Napi::Object Main(Napi::Env env, Napi::Object exports) {
   QSvgWidgetWrap::init(env, exports);
   QDesktopWidgetWrap::init(env, exports);
   QOpenGLWidgetWrap::init(env, exports);
+  QOpenGLContextWrap::init(env, exports);
   return exports;
 }
 
