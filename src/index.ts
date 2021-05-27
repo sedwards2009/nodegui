@@ -20,6 +20,7 @@ export { QStyle, QStylePixelMetric } from './lib/QtGui/QStyle';
 export { QFontDatabase, SystemFont, WritingSystem } from './lib/QtGui/QFontDatabase';
 export { QFontMetrics } from './lib/QtGui/QFontMetrics';
 export { QOpenGLContext } from './lib/QtGui/QOpenGLContext';
+export { QOpenGLFunctions } from './lib/QtGui/QOpenGLFunctions';
 // Events: Maybe a separate module ?
 export { QKeyEvent } from './lib/QtGui/QEvent/QKeyEvent';
 export { QMouseEvent } from './lib/QtGui/QEvent/QMouseEvent';

@@ -2,6 +2,7 @@ import addon from '../utils/addon';
 import { NativeElement, Component } from '../core/Component';
 import { checkIfNativeElement } from '../utils/helpers';
 import { QObject } from '../QtCore/QObject';
+import { QOpenGLFunctions } from './QOpenGLFunctions';
 
 
 export class QOpenGLContext extends Component {
@@ -22,10 +23,14 @@ export class QOpenGLContext extends Component {
         }
     }
 
+    functions(): QOpenGLFunctions {
+        return new QOpenGLFunctions(this.native.functions());
+    }
+
     /**
     Returns the last context which called makeCurrent in the current thread, or nullptr, if no context is current.
     */
     static currentContext(): QOpenGLContext {
-        return addon.QOpenGLContext.currentContext();
+        return new QOpenGLContext(addon.QOpenGLContext.currentContext());
     }
 }

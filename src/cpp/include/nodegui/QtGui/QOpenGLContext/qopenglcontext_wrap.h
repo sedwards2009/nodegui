@@ -13,6 +13,7 @@ class DLL_EXPORT QOpenGLContextWrap : public Napi::ObjectWrap<QOpenGLContextWrap
 
  private:
   QPointer<QOpenGLContext> instance;
+  bool isOwnsInstance;
 
  public:
   static Napi::Object init(Napi::Env env, Napi::Object exports);
@@ -32,7 +33,7 @@ class DLL_EXPORT QOpenGLContextWrap : public Napi::ObjectWrap<QOpenGLContextWrap
 // QOpenGLExtraFunctions *	extraFunctions() const
 // QSurfaceFormat 	format() const
 
-// QOpenGLFunctions *	functions() const
+  Napi::Value functions(const Napi::CallbackInfo& info);
 
 // QFunctionPointer 	getProcAddress(const QByteArray &procName) const
 // QFunctionPointer 	getProcAddress(const char *procName) const
