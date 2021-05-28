@@ -6,7 +6,7 @@
 #include <QPointer>
 
 #include "Extras/Export/export.h"
-#include "QtCore/QObject/qobject_macro.h"
+#include "core/Component/component_macro.h"
 
 class DLL_EXPORT QOpenGLContextWrap : public Napi::ObjectWrap<QOpenGLContextWrap> {
   COMPONENT_WRAPPED_METHODS_DECLARATION
