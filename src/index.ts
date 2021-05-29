@@ -21,6 +21,7 @@ export { QFontDatabase, SystemFont, WritingSystem } from './lib/QtGui/QFontDatab
 export { QFontMetrics } from './lib/QtGui/QFontMetrics';
 export { QOpenGLContext } from './lib/QtGui/QOpenGLContext';
 export { QOpenGLFunctions } from './lib/QtGui/QOpenGLFunctions';
+export { QOpenGLShader } from './lib/QtGui/QOpenGLShader';
 export { QOpenGLTexture } from './lib/QtGui/QOpenGLTexture';
 // Events: Maybe a separate module ?
 export { QKeyEvent } from './lib/QtGui/QEvent/QKeyEvent';
