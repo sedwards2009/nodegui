@@ -1,0 +1,30 @@
+#pragma once
+
+#include <napi.h>
+
+#include <QOpenGLShaderProgram>
+#include <QPointer>
+
+#include "Extras/Export/export.h"
+#include "core/Component/component_macro.h"
+
+class DLL_EXPORT QOpenGLShaderProgramWrap : public Napi::ObjectWrap<QOpenGLShaderProgramWrap> {
+  COMPONENT_WRAPPED_METHODS_DECLARATION
+
+ private:
+  QPointer<QOpenGLShaderProgram> instance;
+
+ public:
+  static Napi::Object init(Napi::Env env, Napi::Object exports);
+  QOpenGLShaderProgramWrap(const Napi::CallbackInfo& info);
+  ~QOpenGLShaderProgramWrap();
+  QOpenGLShaderProgram* getInternalInstance();
+  // class constructor
+  static Napi::FunctionReference constructor;
+  // wrapped methods
+
+  Napi::Value addShader(const Napi::CallbackInfo& info);
+  Napi::Value link(const Napi::CallbackInfo& info);
+  Napi::Value attributeLocation(const Napi::CallbackInfo& info);
+  Napi::Value uniformLocation(const Napi::CallbackInfo& info);
+};
