@@ -25,6 +25,7 @@ export { QOpenGLFunctions } from './lib/QtGui/QOpenGLFunctions';
 export { QOpenGLShader } from './lib/QtGui/QOpenGLShader';
 export { QOpenGLShaderProgram } from './lib/QtGui/QOpenGLShaderProgram';
 export { QOpenGLTexture } from './lib/QtGui/QOpenGLTexture';
+export { QSurfaceFormat } from './lib/QtGui/QSurfaceFormat';
 // Events: Maybe a separate module ?
 export { QKeyEvent } from './lib/QtGui/QEvent/QKeyEvent';
 export { QMouseEvent } from './lib/QtGui/QEvent/QMouseEvent';
