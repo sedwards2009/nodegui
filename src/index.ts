@@ -19,6 +19,7 @@ export { QClipboard, QClipboardMode } from './lib/QtGui/QClipboard';
 export { QStyle, QStylePixelMetric } from './lib/QtGui/QStyle';
 export { QFontDatabase, SystemFont, WritingSystem } from './lib/QtGui/QFontDatabase';
 export { QFontMetrics } from './lib/QtGui/QFontMetrics';
+export { QOpenGLBuffer } from './lib/QtGui/QOpenGLBuffer';
 export { QOpenGLContext } from './lib/QtGui/QOpenGLContext';
 export { QOpenGLFunctions } from './lib/QtGui/QOpenGLFunctions';
 export { QOpenGLShader } from './lib/QtGui/QOpenGLShader';
