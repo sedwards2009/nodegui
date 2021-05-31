@@ -7,13 +7,13 @@ import { QOpenGLBuffer } from './QOpenGLBuffer';
 
 /**
 
-> Access to OpenGL ES 2.0 functions.
+> Access to OpenGL ES 2.0, 3.0, 3.1 and 3.2 functions.
 
-Note: Unlike the C++ `QOpenGLFunctions` class, this version drops the `gl`
+Note: Unlike the C++ `QOpenGLExtraFunctions` class, this version drops the `gl`
 prefix for method and constant names to more closely match WebGL.
 
 */
-export class QOpenGLFunctions extends Component {
+export class QOpenGLExtraFunctions extends Component {
     native: NativeElement;
 
     readonly CURRENT_BIT = 0x00000001;
@@ -342,14 +342,14 @@ export class QOpenGLFunctions extends Component {
     constructor(arg?: NativeElement | QOpenGLContext) {
         super();
         if (!arg) {
-            this.native = new addon.QOpenGLFunctions();
+            this.native = new addon.QOpenGLExtraFunctions();
         } else {
           if (checkIfNativeElement(arg)) {
             this.native = arg as NativeElement;
           } else if (arg.native) {
-              this.native = new addon.QOpenGLFunctions((arg as QOpenGLContext).native);
+              this.native = new addon.QOpenGLExtraFunctions((arg as QOpenGLContext).native);
             } else {
-              this.native = new addon.QOpenGLFunctions();
+              this.native = new addon.QOpenGLExtraFunctions();
             }
         }
     }

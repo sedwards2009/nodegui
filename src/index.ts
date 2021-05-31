@@ -21,7 +21,7 @@ export { QFontDatabase, SystemFont, WritingSystem } from './lib/QtGui/QFontDatab
 export { QFontMetrics } from './lib/QtGui/QFontMetrics';
 export { QOpenGLBuffer } from './lib/QtGui/QOpenGLBuffer';
 export { QOpenGLContext } from './lib/QtGui/QOpenGLContext';
-export { QOpenGLFunctions } from './lib/QtGui/QOpenGLFunctions';
+export { QOpenGLExtraFunctions } from './lib/QtGui/QOpenGLExtraFunctions';
 export { QOpenGLShader } from './lib/QtGui/QOpenGLShader';
 export { QOpenGLShaderProgram } from './lib/QtGui/QOpenGLShaderProgram';
 export { QOpenGLTexture } from './lib/QtGui/QOpenGLTexture';

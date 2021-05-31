@@ -33,7 +33,7 @@ class DLL_EXPORT QOpenGLContextWrap : public Napi::ObjectWrap<QOpenGLContextWrap
 // QOpenGLExtraFunctions *	extraFunctions() const
 // QSurfaceFormat 	format() const
 
-  Napi::Value functions(const Napi::CallbackInfo& info);
+  Napi::Value extraFunctions(const Napi::CallbackInfo& info);
 
 // QFunctionPointer 	getProcAddress(const QByteArray &procName) const
 // QFunctionPointer 	getProcAddress(const char *procName) const

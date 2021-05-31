@@ -65,7 +65,7 @@ add_library(${CORE_WIDGETS_ADDON} SHARED
     "${PROJECT_SOURCE_DIR}/src/cpp/lib/QtGui/QStyle/qstyle_wrap.cpp"
     "${PROJECT_SOURCE_DIR}/src/cpp/lib/QtGui/QOpenGLBuffer/qopenglbuffer_wrap.cpp"
     "${PROJECT_SOURCE_DIR}/src/cpp/lib/QtGui/QOpenGLContext/qopenglcontext_wrap.cpp"
-    "${PROJECT_SOURCE_DIR}/src/cpp/lib/QtGui/QOpenGLFunctions/qopenglfunctions_wrap.cpp"
+    "${PROJECT_SOURCE_DIR}/src/cpp/lib/QtGui/QOpenGLExtraFunctions/qopenglextrafunctions_wrap.cpp"
     "${PROJECT_SOURCE_DIR}/src/cpp/lib/QtGui/QOpenGLShader/qopenglshader_wrap.cpp"
     "${PROJECT_SOURCE_DIR}/src/cpp/lib/QtGui/QOpenGLShaderProgram/qopenglshaderprogram_wrap.cpp"
     "${PROJECT_SOURCE_DIR}/src/cpp/lib/QtGui/QSurfaceFormat/qsurfaceformat_wrap.cpp"

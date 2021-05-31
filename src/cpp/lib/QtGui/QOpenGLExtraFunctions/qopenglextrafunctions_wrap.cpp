@@ -1,54 +1,54 @@
 #include "QtGui/QOpenGLContext/qopenglcontext_wrap.h"
-#include "QtGui/QOpenGLFunctions/qopenglfunctions_wrap.h"
+#include "QtGui/QOpenGLExtraFunctions/qopenglextrafunctions_wrap.h"
 
 #include "Extras/Utils/nutils.h"
 
 
-Napi::FunctionReference QOpenGLFunctionsWrap::constructor;
+Napi::FunctionReference QOpenGLExtraFunctionsWrap::constructor;
 
-Napi::Object QOpenGLFunctionsWrap::init(Napi::Env env, Napi::Object exports) {
+Napi::Object QOpenGLExtraFunctionsWrap::init(Napi::Env env, Napi::Object exports) {
   Napi::HandleScope scope(env);
-  char CLASSNAME[] = "QOpenGLFunctions";
+  char CLASSNAME[] = "QOpenGLExtraFunctions";
   Napi::Function func =
       DefineClass(env, CLASSNAME, {
-                  InstanceMethod("glBindBuffer", &QOpenGLFunctionsWrap::glBindBuffer),
-                  InstanceMethod("glClear", &QOpenGLFunctionsWrap::glClear),
-                  InstanceMethod("glClearColor", &QOpenGLFunctionsWrap::glClearColor),
-                  InstanceMethod("glCullFace", &QOpenGLFunctionsWrap::glCullFace),
-                  InstanceMethod("glDepthFunc", &QOpenGLFunctionsWrap::glDepthFunc),
-                  InstanceMethod("glDisable", &QOpenGLFunctionsWrap::glDisable),
-                  InstanceMethod("glDrawArrays", &QOpenGLFunctionsWrap::glDrawArrays),
-                  InstanceMethod("glEnable", &QOpenGLFunctionsWrap::glEnable),
-                  InstanceMethod("glFrontFace", &QOpenGLFunctionsWrap::glFrontFace),
-                  InstanceMethod("glGetString", &QOpenGLFunctionsWrap::glGetString),
-                  InstanceMethod("glUseProgram", &QOpenGLFunctionsWrap::glUseProgram),
-                  InstanceMethod("initializeOpenGLFunctions", &QOpenGLFunctionsWrap::initializeOpenGLFunctions),
-                  COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QOpenGLFunctionsWrap)});
+                  InstanceMethod("glBindBuffer", &QOpenGLExtraFunctionsWrap::glBindBuffer),
+                  InstanceMethod("glClear", &QOpenGLExtraFunctionsWrap::glClear),
+                  InstanceMethod("glClearColor", &QOpenGLExtraFunctionsWrap::glClearColor),
+                  InstanceMethod("glCullFace", &QOpenGLExtraFunctionsWrap::glCullFace),
+                  InstanceMethod("glDepthFunc", &QOpenGLExtraFunctionsWrap::glDepthFunc),
+                  InstanceMethod("glDisable", &QOpenGLExtraFunctionsWrap::glDisable),
+                  InstanceMethod("glDrawArrays", &QOpenGLExtraFunctionsWrap::glDrawArrays),
+                  InstanceMethod("glEnable", &QOpenGLExtraFunctionsWrap::glEnable),
+                  InstanceMethod("glFrontFace", &QOpenGLExtraFunctionsWrap::glFrontFace),
+                  InstanceMethod("glGetString", &QOpenGLExtraFunctionsWrap::glGetString),
+                  InstanceMethod("glUseProgram", &QOpenGLExtraFunctionsWrap::glUseProgram),
+                  InstanceMethod("initializeOpenGLFunctions", &QOpenGLExtraFunctionsWrap::initializeOpenGLFunctions),
+                  COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QOpenGLExtraFunctionsWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
   return exports;
 }
 
-QOpenGLFunctions* QOpenGLFunctionsWrap::getInternalInstance() {
+QOpenGLExtraFunctions* QOpenGLExtraFunctionsWrap::getInternalInstance() {
   return this->instance;
 }
 
-QOpenGLFunctionsWrap::QOpenGLFunctionsWrap(const Napi::CallbackInfo& info)
-    : Napi::ObjectWrap<QOpenGLFunctionsWrap>(info), isOwnsInstance(true) {
+QOpenGLExtraFunctionsWrap::QOpenGLExtraFunctionsWrap(const Napi::CallbackInfo& info)
+    : Napi::ObjectWrap<QOpenGLExtraFunctionsWrap>(info), isOwnsInstance(true) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
   if (info.Length() == 0) {
-    this->instance = new QOpenGLFunctions();
+    this->instance = new QOpenGLExtraFunctions();
   } else if (info.Length() == 1) {
     if (info[0].IsExternal()) {
-      this->instance = info[0].As<Napi::External<QOpenGLFunctions>>().Data();
+      this->instance = info[0].As<Napi::External<QOpenGLExtraFunctions>>().Data();
       this->isOwnsInstance = false;
     } else {
       Napi::Object contextObject = info[0].As<Napi::Object>();
       QOpenGLContextWrap* contextWrap = Napi::ObjectWrap<QOpenGLContextWrap>::Unwrap(contextObject);
       QOpenGLContext* context = contextWrap->getInternalInstance();
-      this->instance = new QOpenGLFunctions(context);
+      this->instance = new QOpenGLExtraFunctions(context);
     }
   } else {
     Napi::TypeError::New(env, "Wrong number of arguments")
@@ -57,13 +57,13 @@ QOpenGLFunctionsWrap::QOpenGLFunctionsWrap(const Napi::CallbackInfo& info)
   this->rawData = extrautils::configureComponent(this->getInternalInstance());
 }
 
-QOpenGLFunctionsWrap::~QOpenGLFunctionsWrap() {
+QOpenGLExtraFunctionsWrap::~QOpenGLExtraFunctionsWrap() {
   if (this->isOwnsInstance) {
     delete this->instance;
   }
 }
 
-Napi::Value QOpenGLFunctionsWrap::initializeOpenGLFunctions(const Napi::CallbackInfo& info) {
+Napi::Value QOpenGLExtraFunctionsWrap::initializeOpenGLFunctions(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
@@ -71,7 +71,7 @@ Napi::Value QOpenGLFunctionsWrap::initializeOpenGLFunctions(const Napi::Callback
   return env.Null();
 }
 
-Napi::Value QOpenGLFunctionsWrap::glBindBuffer(const Napi::CallbackInfo& info) {
+Napi::Value QOpenGLExtraFunctionsWrap::glBindBuffer(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
@@ -81,7 +81,7 @@ Napi::Value QOpenGLFunctionsWrap::glBindBuffer(const Napi::CallbackInfo& info) {
   return env.Null();
 }
 
-Napi::Value QOpenGLFunctionsWrap::glClearColor(const Napi::CallbackInfo& info) {
+Napi::Value QOpenGLExtraFunctionsWrap::glClearColor(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
@@ -98,7 +98,7 @@ Napi::Value QOpenGLFunctionsWrap::glClearColor(const Napi::CallbackInfo& info) {
   return env.Null();
 }
 
-Napi::Value QOpenGLFunctionsWrap::glClear(const Napi::CallbackInfo& info) {
+Napi::Value QOpenGLExtraFunctionsWrap::glClear(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
@@ -112,7 +112,7 @@ Napi::Value QOpenGLFunctionsWrap::glClear(const Napi::CallbackInfo& info) {
   return env.Null();
 }
 
-Napi::Value QOpenGLFunctionsWrap::glFrontFace(const Napi::CallbackInfo& info) {
+Napi::Value QOpenGLExtraFunctionsWrap::glFrontFace(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
@@ -126,7 +126,7 @@ Napi::Value QOpenGLFunctionsWrap::glFrontFace(const Napi::CallbackInfo& info) {
   return env.Null();
 }
 
-Napi::Value QOpenGLFunctionsWrap::glCullFace(const Napi::CallbackInfo& info) {
+Napi::Value QOpenGLExtraFunctionsWrap::glCullFace(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
@@ -140,7 +140,7 @@ Napi::Value QOpenGLFunctionsWrap::glCullFace(const Napi::CallbackInfo& info) {
   return env.Null();
 }
 
-Napi::Value QOpenGLFunctionsWrap::glDisable(const Napi::CallbackInfo& info) {
+Napi::Value QOpenGLExtraFunctionsWrap::glDisable(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
@@ -154,7 +154,7 @@ Napi::Value QOpenGLFunctionsWrap::glDisable(const Napi::CallbackInfo& info) {
   return env.Null();
 }
 
-Napi::Value QOpenGLFunctionsWrap::glEnable(const Napi::CallbackInfo& info) {
+Napi::Value QOpenGLExtraFunctionsWrap::glEnable(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
@@ -168,7 +168,7 @@ Napi::Value QOpenGLFunctionsWrap::glEnable(const Napi::CallbackInfo& info) {
   return env.Null();
 }
 
-Napi::Value QOpenGLFunctionsWrap::glDrawArrays(const Napi::CallbackInfo& info) {
+Napi::Value QOpenGLExtraFunctionsWrap::glDrawArrays(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
@@ -184,7 +184,7 @@ Napi::Value QOpenGLFunctionsWrap::glDrawArrays(const Napi::CallbackInfo& info) {
   return env.Null();
 }
 
-Napi::Value QOpenGLFunctionsWrap::glUseProgram(const Napi::CallbackInfo& info) {
+Napi::Value QOpenGLExtraFunctionsWrap::glUseProgram(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
@@ -198,7 +198,7 @@ Napi::Value QOpenGLFunctionsWrap::glUseProgram(const Napi::CallbackInfo& info) {
   return env.Null();
 }
 
-Napi::Value QOpenGLFunctionsWrap::glGetString(const Napi::CallbackInfo& info) {
+Napi::Value QOpenGLExtraFunctionsWrap::glGetString(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
@@ -212,7 +212,7 @@ Napi::Value QOpenGLFunctionsWrap::glGetString(const Napi::CallbackInfo& info) {
   return Napi::String::New(env, result.toStdString());
 }
 
-Napi::Value QOpenGLFunctionsWrap::glDepthFunc(const Napi::CallbackInfo& info) {
+Napi::Value QOpenGLExtraFunctionsWrap::glDepthFunc(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 

@@ -2,7 +2,7 @@ import addon from '../utils/addon';
 import { NativeElement, Component } from '../core/Component';
 import { checkIfNativeElement } from '../utils/helpers';
 import { QObject } from '../QtCore/QObject';
-import { QOpenGLFunctions } from './QOpenGLFunctions';
+import { QOpenGLExtraFunctions } from './QOpenGLExtraFunctions';
 
 
 export class QOpenGLContext extends Component {
@@ -23,8 +23,12 @@ export class QOpenGLContext extends Component {
         }
     }
 
-    functions(): QOpenGLFunctions {
-        return new QOpenGLFunctions(this.native.functions());
+    functions(): QOpenGLExtraFunctions {
+        return this.extraFunctions();
+    }
+
+    extraFunctions(): QOpenGLExtraFunctions {
+        return new QOpenGLExtraFunctions(this.native.functions());
     }
 
 	isOpenGLES(): boolean {

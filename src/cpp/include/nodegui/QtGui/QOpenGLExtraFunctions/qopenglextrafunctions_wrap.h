@@ -2,23 +2,23 @@
 
 #include <napi.h>
 
-#include <QOpenGLFunctions>
+#include <QOpenGLExtraFunctions>
 
 #include "Extras/Export/export.h"
 #include "core/Component/component_macro.h"
 
-class DLL_EXPORT QOpenGLFunctionsWrap : public Napi::ObjectWrap<QOpenGLFunctionsWrap> {
+class DLL_EXPORT QOpenGLExtraFunctionsWrap : public Napi::ObjectWrap<QOpenGLExtraFunctionsWrap> {
   COMPONENT_WRAPPED_METHODS_DECLARATION
  private:
-  QOpenGLFunctions* instance;
+  QOpenGLExtraFunctions* instance;
   bool isOwnsInstance;
 
  public:
   static Napi::FunctionReference constructor;
   static Napi::Object init(Napi::Env env, Napi::Object exports);
-  QOpenGLFunctionsWrap(const Napi::CallbackInfo& info);
-  ~QOpenGLFunctionsWrap();
-  QOpenGLFunctions* getInternalInstance();
+  QOpenGLExtraFunctionsWrap(const Napi::CallbackInfo& info);
+  ~QOpenGLExtraFunctionsWrap();
+  QOpenGLExtraFunctions* getInternalInstance();
   // Wrapped methods
   Napi::Value glBindBuffer(const Napi::CallbackInfo& info);
   Napi::Value glClear(const Napi::CallbackInfo& info);

@@ -1,6 +1,6 @@
 #include "QtCore/QObject/qobject_wrap.h"
 #include "QtGui/QOpenGLContext/qopenglcontext_wrap.h"
-#include "QtGui/QOpenGLFunctions/qopenglfunctions_wrap.h"
+#include "QtGui/QOpenGLExtraFunctions/qopenglextrafunctions_wrap.h"
 
 #include "Extras/Utils/nutils.h"
 
@@ -11,7 +11,7 @@ Napi::Object QOpenGLContextWrap::init(Napi::Env env, Napi::Object exports) {
   char CLASSNAME[] = "QOpenGLContext";
   Napi::Function func = DefineClass(
       env, CLASSNAME, {
-      InstanceMethod("functions", &QOpenGLContextWrap::functions),
+      InstanceMethod("extraFunctions", &QOpenGLContextWrap::extraFunctions),
       InstanceMethod("isOpenGLES", &QOpenGLContextWrap::isOpenGLES),
       InstanceMethod("isValid", &QOpenGLContextWrap::isValid),
       StaticMethod("currentContext", &StaticOpenGLContextWrapMethods::currentContext),
@@ -56,16 +56,17 @@ QOpenGLContextWrap::~QOpenGLContextWrap() {
   }
 }
 
-Napi::Value QOpenGLContextWrap::functions(const Napi::CallbackInfo& info) {
+Napi::Value QOpenGLContextWrap::extraFunctions(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
-  QOpenGLFunctions* functions = this->instance->functions();
+  QOpenGLExtraFunctions* functions = this->instance->extraFunctions();
   if (functions == nullptr) {
     return env.Null();
   }
 
-  auto instance = QOpenGLFunctionsWrap::constructor.New({Napi::External<QOpenGLFunctions>::New(env, functions)});
+  auto instance = QOpenGLExtraFunctionsWrap::constructor.New(
+    {Napi::External<QOpenGLExtraFunctions>::New(env, functions)});
   return instance;
 }
 
