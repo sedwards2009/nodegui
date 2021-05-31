@@ -10,7 +10,8 @@ Napi::Object QOpenGLTextureWrap::init(Napi::Env env, Napi::Object exports) {
   char CLASSNAME[] = "QOpenGLTexture";
   Napi::Function func = DefineClass(
       env, CLASSNAME,
-      {COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QOpenGLTextureWrap)});
+      {InstanceMethod("bind", &QOpenGLTextureWrap::bind),
+      COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QOpenGLTextureWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
   return exports;
@@ -41,4 +42,12 @@ QOpenGLTextureWrap::QOpenGLTextureWrap(const Napi::CallbackInfo& info)
 
 QOpenGLTextureWrap::~QOpenGLTextureWrap() {
   delete this->instance;
+}
+
+Napi::Value QOpenGLTextureWrap::bind(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  this->instance->bind();
+  return env.Null();
 }

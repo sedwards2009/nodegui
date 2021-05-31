@@ -9,12 +9,14 @@ Napi::Object QOpenGLBufferWrap::init(Napi::Env env, Napi::Object exports) {
   Napi::HandleScope scope(env);
   char CLASSNAME[] = "QOpenGLBuffer";
   Napi::Function func = DefineClass(
-      env, CLASSNAME,
-      {InstanceMethod("allocate", &QOpenGLBufferWrap::allocate),
+      env, CLASSNAME, {
+      InstanceMethod("allocate", &QOpenGLBufferWrap::allocate),
       InstanceMethod("bind", &QOpenGLBufferWrap::bind),
+      InstanceMethod("bufferId", &QOpenGLBufferWrap::bufferId),
       InstanceMethod("create", &QOpenGLBufferWrap::create),
       InstanceMethod("destroy", &QOpenGLBufferWrap::destroy),
       InstanceMethod("release", &QOpenGLBufferWrap::release),
+      InstanceMethod("size", &QOpenGLBufferWrap::size),
       InstanceMethod("write", &QOpenGLBufferWrap::release),
       COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QOpenGLBufferWrap)});
   constructor = Napi::Persistent(func);
@@ -31,15 +33,13 @@ QOpenGLBufferWrap::QOpenGLBufferWrap(const Napi::CallbackInfo& info)
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
-  if (info.Length() == 1) {
-    auto type = info[0].As<Napi::Number>().Int32Value();
-    this->instance = new QOpenGLBuffer(static_cast<QOpenGLBuffer::Type>(type));
-  } else if (info.Length() == 0) {
-    this->instance = new QOpenGLBuffer();
-  } else {
+  if (info.Length() != 1) {
     Napi::TypeError::New(env, "Wrong number of arguments")
         .ThrowAsJavaScriptException();
   }
+
+  int type = info[0].As<Napi::Number>().Int32Value();
+  this->instance = new QOpenGLBuffer(static_cast<QOpenGLBuffer::Type>(type));
   this->rawData = extrautils::configureComponent(this->getInternalInstance());
 }
 
@@ -103,4 +103,20 @@ Napi::Value QOpenGLBufferWrap::write(const Napi::CallbackInfo& info) {
   auto count = info[2].As<Napi::Number>().Int32Value();
   this->instance->write(offset, arrayBuffer.Data(), count);
   return env.Null();
+}
+
+Napi::Value QOpenGLBufferWrap::size(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  int size = this->instance->size();
+  return Napi::Number::New(env, size);
+}
+
+Napi::Value QOpenGLBufferWrap::bufferId(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  int id = this->instance->bufferId();
+  return Napi::Number::New(env, id);
 }

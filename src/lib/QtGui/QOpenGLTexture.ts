@@ -29,4 +29,8 @@ export class QOpenGLTexture extends Component {
             }
         }
     }
+
+    bind(): void {
+        this.native.bind();
+    }
 }

@@ -12,13 +12,9 @@ export enum QOpenGLBufferType {
 export class QOpenGLBuffer extends Component {
     native: NativeElement;
 
-    constructor(arg?: QOpenGLBufferType) {
+    constructor(arg: QOpenGLBufferType) {
         super();
-        if (!arg) {
-            this.native = new addon.QOpenGLBuffer();
-        } else {
-            this.native = new addon.QOpenGLBuffer(arg);
-        }
+        this.native = new addon.QOpenGLBuffer(arg);
     }
 
     allocate(bytesCount: number): void {
@@ -27,6 +23,10 @@ export class QOpenGLBuffer extends Component {
 
     bind(): void {
         return this.native.bind();
+    }
+
+    bufferId(): number {
+        return this.native.bufferId();
     }
 
     create(): boolean {
@@ -43,5 +43,9 @@ export class QOpenGLBuffer extends Component {
 
     write(offset: number, arrayBuffer: ArrayBuffer, count: number): void {
         this.native.write(offset, arrayBuffer, count);
+    }
+
+    size(): number  {
+        return this.native.size();
     }
 }

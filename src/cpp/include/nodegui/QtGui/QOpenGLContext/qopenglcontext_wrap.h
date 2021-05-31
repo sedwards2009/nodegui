@@ -38,8 +38,10 @@ class DLL_EXPORT QOpenGLContextWrap : public Napi::ObjectWrap<QOpenGLContextWrap
 // QFunctionPointer 	getProcAddress(const QByteArray &procName) const
 // QFunctionPointer 	getProcAddress(const char *procName) const
 // bool 	hasExtension(const QByteArray &extension) const
-// bool 	isOpenGLES() const
-// bool 	isValid() const
+
+  Napi::Value isOpenGLES(const Napi::CallbackInfo& info);
+  Napi::Value isValid(const Napi::CallbackInfo& info);
+
 // bool 	makeCurrent(QSurface *surface)
 // QVariant 	nativeHandle() const
 // QScreen *	screen() const

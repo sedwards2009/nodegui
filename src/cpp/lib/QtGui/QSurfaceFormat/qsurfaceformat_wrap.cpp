@@ -11,6 +11,9 @@ Napi::Object QSurfaceFormatWrap::init(Napi::Env env, Napi::Object exports) {
   Napi::Function func = DefineClass(
       env, CLASSNAME, {
       InstanceMethod("setDepthBufferSize", &QSurfaceFormatWrap::setDepthBufferSize),
+      InstanceMethod("setMajorVersion", &QSurfaceFormatWrap::setMajorVersion),
+      InstanceMethod("setMinorVersion", &QSurfaceFormatWrap::setMinorVersion),
+      InstanceMethod("setProfile", &QSurfaceFormatWrap::setProfile),
       InstanceMethod("setStencilBufferSize", &QSurfaceFormatWrap::setStencilBufferSize),
       StaticMethod("setDefaultFormat", &StaticQSurfaceFormatWrapMethods::setDefaultFormat),
       COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QOpenGLBufferWrap)});
@@ -50,6 +53,33 @@ Napi::Value QSurfaceFormatWrap::setStencilBufferSize(const Napi::CallbackInfo& i
 
   int size = info[0].As<Napi::Number>().Int32Value();
   this->instance->setStencilBufferSize(size);
+  return env.Null();
+}
+
+Napi::Value QSurfaceFormatWrap::setProfile(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  int profile = info[0].As<Napi::Number>().Int32Value();
+  this->instance->setProfile(static_cast<QSurfaceFormat::OpenGLContextProfile>(profile));
+  return env.Null();
+}
+
+Napi::Value QSurfaceFormatWrap::setMajorVersion(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  int version = info[0].As<Napi::Number>().Int32Value();
+  this->instance->setMajorVersion(version);
+  return env.Null();
+}
+
+Napi::Value QSurfaceFormatWrap::setMinorVersion(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  int version = info[0].As<Napi::Number>().Int32Value();
+  this->instance->setMinorVersion(version);
   return env.Null();
 }
 

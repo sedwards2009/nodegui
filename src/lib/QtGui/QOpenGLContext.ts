@@ -27,6 +27,14 @@ export class QOpenGLContext extends Component {
         return new QOpenGLFunctions(this.native.functions());
     }
 
+	isOpenGLES(): boolean {
+        return this.native.isOpenGLES();
+    }
+
+    isValid(): boolean {
+        return this.native.isValid();
+    }
+
     /**
     Returns the last context which called makeCurrent in the current thread, or nullptr, if no context is current.
     */

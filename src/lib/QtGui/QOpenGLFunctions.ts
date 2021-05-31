@@ -2,6 +2,8 @@ import addon from '../utils/addon';
 import { NativeElement, Component } from '../core/Component';
 import { checkIfNativeElement } from '../utils/helpers';
 import { QOpenGLContext } from './QOpenGLContext';
+import { QOpenGLShaderProgram } from './QOpenGLShaderProgram';
+import { QOpenGLBuffer } from './QOpenGLBuffer';
 
 /**
 
@@ -353,26 +355,50 @@ export class QOpenGLFunctions extends Component {
     }
 
     initializeOpenGLFunctions(): void {
-      this.native.initializeOpenGLFunctions();
+        this.native.initializeOpenGLFunctions();
+    }
+
+    bindBuffer(target: number, buffer: QOpenGLBuffer): void {
+        this.native.glBindBuffer(target, buffer.bufferId());
     }
 
     clearColor(red: number, green: number, blue: number, alpha: number): void {
-      this.native.glClearColor(red, green, blue, alpha);
+        this.native.glClearColor(red, green, blue, alpha);
     }
 
     clear(mask: number): void {
-      this.native.glClear(mask);
+        this.native.glClear(mask);
     }
 
     frontFace(arg: number): void {
-      this.native.glFrontFace(arg);
+        this.native.glFrontFace(arg);
     }
 
     cullFace(arg: number): void {
-      this.native.glCullFace(arg);
+        this.native.glCullFace(arg);
+    }
+
+    disable(arg: number): void {
+        this.native.glDisable(arg);
     }
 
     enable(arg: number): void {
-      this.native.glEnable(arg);
+        this.native.glEnable(arg);
+    }
+
+    drawArrays(mode: GLenum, first: number, count: number): void {
+        this.native.glDrawArrays(mode, first, count);
+    }
+
+    useProgram(program: QOpenGLShaderProgram): void {
+        this.native.glUseProgram(program.programId());
+    }
+
+    getString(name: number): string {
+        return this.native.glGetString(name);
+    }
+
+    depthFunc(func: number): void {
+        this.native.glDepthFunc(func);
     }
 }

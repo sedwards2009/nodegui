@@ -22,4 +22,5 @@ class DLL_EXPORT QOpenGLTextureWrap : public Napi::ObjectWrap<QOpenGLTextureWrap
   static Napi::FunctionReference constructor;
   // wrapped methods
 
+  Napi::Value bind(const Napi::CallbackInfo& info);
 };

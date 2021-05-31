@@ -10,8 +10,10 @@ Napi::Object QOpenGLContextWrap::init(Napi::Env env, Napi::Object exports) {
   Napi::HandleScope scope(env);
   char CLASSNAME[] = "QOpenGLContext";
   Napi::Function func = DefineClass(
-      env, CLASSNAME,
-      {InstanceMethod("functions", &QOpenGLContextWrap::functions),
+      env, CLASSNAME, {
+      InstanceMethod("functions", &QOpenGLContextWrap::functions),
+      InstanceMethod("isOpenGLES", &QOpenGLContextWrap::isOpenGLES),
+      InstanceMethod("isValid", &QOpenGLContextWrap::isValid),
       StaticMethod("currentContext", &StaticOpenGLContextWrapMethods::currentContext),
       COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QOpenGLContextWrap)});
   constructor = Napi::Persistent(func);
@@ -67,8 +69,23 @@ Napi::Value QOpenGLContextWrap::functions(const Napi::CallbackInfo& info) {
   return instance;
 }
 
-Napi::Value StaticOpenGLContextWrapMethods::currentContext(
-    const Napi::CallbackInfo& info) {
+Napi::Value QOpenGLContextWrap::isOpenGLES(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  bool result = this->instance->isOpenGLES();
+  return Napi::Boolean::New(env, result);
+}
+
+Napi::Value QOpenGLContextWrap::isValid(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  bool result = this->instance->isValid();
+  return Napi::Boolean::New(env, result);
+}
+
+Napi::Value StaticOpenGLContextWrapMethods::currentContext(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 

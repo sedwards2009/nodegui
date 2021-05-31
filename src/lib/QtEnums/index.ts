@@ -55,6 +55,8 @@ export { MouseEventFlag } from './MouseEventFlag';
 export { MouseEventSource } from './MouseEventSource';
 export { NativeGestureType } from './NativeGestureType';
 export { NavigationMode } from './NavigationMode';
+export { OpenGLContextProfile } from './OpenGLContextProfile';
+export { QOpenGLBufferType } from './QOpenGLBufferType';
 export { Option } from './Option';
 export { Orientation } from './Orientation';
 export { ScreenOrientation } from './ScreenOrientation';
