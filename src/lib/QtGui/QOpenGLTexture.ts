@@ -1,8 +1,6 @@
 import addon from '../utils/addon';
 import { NativeElement, Component } from '../core/Component';
 import { checkIfNativeElement } from '../utils/helpers';
-import { QObject } from '../QtCore/QObject';
-import { QOpenGLFunctions } from './QOpenGLFunctions';
 import { QImage } from './QImage';
 
 enum MipMapGeneration {

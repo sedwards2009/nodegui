@@ -358,8 +358,9 @@ export class QOpenGLExtraFunctions extends Component {
         this.native.initializeOpenGLFunctions();
     }
 
-    bindBuffer(target: number, buffer: QOpenGLBuffer): void {
-        this.native.glBindBuffer(target, buffer.bufferId());
+    bindBuffer(target: number, buffer: QOpenGLBuffer | number): void {
+        const bufferId = (typeof buffer === "object") ? buffer.bufferId() : buffer;
+        this.native.glBindBuffer(target, bufferId);
     }
 
     clearColor(red: number, green: number, blue: number, alpha: number): void {
@@ -400,5 +401,38 @@ export class QOpenGLExtraFunctions extends Component {
 
     depthFunc(func: number): void {
         this.native.glDepthFunc(func);
+    }
+
+    genVertexArrays(numberOfArrays: number): number[] {
+        const result: number[] = [];
+        for (let i=0; i<numberOfArrays; i++) {
+            result.push(this.native.glGenVertexArray());
+        }
+        return result;
+    }
+
+    bindVertexArray(vertexArray: number): void {
+        this.native.glBindVertexArray(vertexArray);
+    }
+
+    enableVertexAttribArray(index: number): void {
+        this.native.glEnableVertexAttribArray(index);
+    }
+
+    vertexAttribPointer(index: number, size: number, type: number, normalized: number | boolean, stride: number): void {
+        const normalizedBoolean = Boolean(normalized);
+        this.native.glVertexAttribPointer(index, size, type, normalizedBoolean, stride);
+    }
+
+    genBuffers(numberOfBuffers: number): number[] {
+        const result: number[] = [];
+        for (let i=0; i<numberOfBuffers; i++) {
+            result.push(this.native.glGenBuffer());
+        }
+        return result;
+    }
+
+    bufferData(target: number, size: number, arrayBuffer: ArrayBuffer, usage: number): void {
+        this.native.glBufferData(target, size, arrayBuffer, usage);
     }
 }

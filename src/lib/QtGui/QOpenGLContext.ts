@@ -28,7 +28,7 @@ export class QOpenGLContext extends Component {
     }
 
     extraFunctions(): QOpenGLExtraFunctions {
-        return new QOpenGLExtraFunctions(this.native.functions());
+        return new QOpenGLExtraFunctions(this.native.extraFunctions());
     }
 
 	isOpenGLES(): boolean {

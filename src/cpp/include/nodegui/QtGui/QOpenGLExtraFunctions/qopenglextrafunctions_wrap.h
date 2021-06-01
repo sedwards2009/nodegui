@@ -21,6 +21,8 @@ class DLL_EXPORT QOpenGLExtraFunctionsWrap : public Napi::ObjectWrap<QOpenGLExtr
   QOpenGLExtraFunctions* getInternalInstance();
   // Wrapped methods
   Napi::Value glBindBuffer(const Napi::CallbackInfo& info);
+  Napi::Value glBindVertexArray(const Napi::CallbackInfo& info);
+  Napi::Value glBufferData(const Napi::CallbackInfo& info);
   Napi::Value glClear(const Napi::CallbackInfo& info);
   Napi::Value glClearColor(const Napi::CallbackInfo& info);
   Napi::Value glCullFace(const Napi::CallbackInfo& info);
@@ -28,8 +30,12 @@ class DLL_EXPORT QOpenGLExtraFunctionsWrap : public Napi::ObjectWrap<QOpenGLExtr
   Napi::Value glDisable(const Napi::CallbackInfo& info);
   Napi::Value glDrawArrays(const Napi::CallbackInfo& info);
   Napi::Value glEnable(const Napi::CallbackInfo& info);
+  Napi::Value glEnableVertexAttribArray(const Napi::CallbackInfo& info);
   Napi::Value glFrontFace(const Napi::CallbackInfo& info);
+  Napi::Value glGenBuffer(const Napi::CallbackInfo& info);
+  Napi::Value glGenVertexArray(const Napi::CallbackInfo& info);
   Napi::Value glGetString(const Napi::CallbackInfo& info);
   Napi::Value glUseProgram(const Napi::CallbackInfo& info);
+  Napi::Value glVertexAttribPointer(const Napi::CallbackInfo& info);
   Napi::Value initializeOpenGLFunctions(const Napi::CallbackInfo& info);
 };

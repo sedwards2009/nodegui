@@ -12,6 +12,8 @@ Napi::Object QOpenGLExtraFunctionsWrap::init(Napi::Env env, Napi::Object exports
   Napi::Function func =
       DefineClass(env, CLASSNAME, {
                   InstanceMethod("glBindBuffer", &QOpenGLExtraFunctionsWrap::glBindBuffer),
+                  InstanceMethod("glBindVertexArray", &QOpenGLExtraFunctionsWrap::glBindVertexArray),
+                  InstanceMethod("glBufferData", &QOpenGLExtraFunctionsWrap::glBufferData),
                   InstanceMethod("glClear", &QOpenGLExtraFunctionsWrap::glClear),
                   InstanceMethod("glClearColor", &QOpenGLExtraFunctionsWrap::glClearColor),
                   InstanceMethod("glCullFace", &QOpenGLExtraFunctionsWrap::glCullFace),
@@ -19,9 +21,13 @@ Napi::Object QOpenGLExtraFunctionsWrap::init(Napi::Env env, Napi::Object exports
                   InstanceMethod("glDisable", &QOpenGLExtraFunctionsWrap::glDisable),
                   InstanceMethod("glDrawArrays", &QOpenGLExtraFunctionsWrap::glDrawArrays),
                   InstanceMethod("glEnable", &QOpenGLExtraFunctionsWrap::glEnable),
+                  InstanceMethod("glEnableVertexAttribArray", &QOpenGLExtraFunctionsWrap::glEnableVertexAttribArray),
                   InstanceMethod("glFrontFace", &QOpenGLExtraFunctionsWrap::glFrontFace),
+                  InstanceMethod("glGenBuffer", &QOpenGLExtraFunctionsWrap::glGenBuffer),
+                  InstanceMethod("glGenVertexArray", &QOpenGLExtraFunctionsWrap::glGenVertexArray),
                   InstanceMethod("glGetString", &QOpenGLExtraFunctionsWrap::glGetString),
                   InstanceMethod("glUseProgram", &QOpenGLExtraFunctionsWrap::glUseProgram),
+                  InstanceMethod("glVertexAttribPointer", &QOpenGLExtraFunctionsWrap::glVertexAttribPointer),
                   InstanceMethod("initializeOpenGLFunctions", &QOpenGLExtraFunctionsWrap::initializeOpenGLFunctions),
                   COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QOpenGLExtraFunctionsWrap)});
   constructor = Napi::Persistent(func);
@@ -223,5 +229,86 @@ Napi::Value QOpenGLExtraFunctionsWrap::glDepthFunc(const Napi::CallbackInfo& inf
 
   GLenum func = info[0].As<Napi::Number>().Uint32Value();
   this->instance->glDepthFunc(func);
+  return env.Null();
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glGenVertexArray(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  GLuint result = 0;
+  this->instance->glGenVertexArrays(1, &result);
+  return Napi::Number::New(env, result);
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glBindVertexArray(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 1) {
+      Napi::TypeError::New(env, "Wrong number of arguments")
+          .ThrowAsJavaScriptException();
+  }
+
+  GLuint vertextArrayFunc = info[0].As<Napi::Number>().Uint32Value();
+  this->instance->glBindVertexArray(vertextArrayFunc);
+  return env.Null();
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glEnableVertexAttribArray(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 1) {
+      Napi::TypeError::New(env, "Wrong number of arguments")
+          .ThrowAsJavaScriptException();
+  }
+
+  GLuint index = info[0].As<Napi::Number>().Uint32Value();
+  this->instance->glEnableVertexAttribArray(index);
+  return env.Null();
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glVertexAttribPointer(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 5) {
+      Napi::TypeError::New(env, "Wrong number of arguments")
+          .ThrowAsJavaScriptException();
+  }
+
+  GLuint index = info[0].As<Napi::Number>().Uint32Value();
+  GLint size = info[1].As<Napi::Number>().Uint32Value();
+  GLenum type =info[2].As<Napi::Number>().Uint32Value();
+  GLboolean normalized = info[3].As<Napi::Boolean>().ToBoolean();
+  GLsizei stride =info[4].As<Napi::Number>().Uint32Value();
+  this->instance->glVertexAttribPointer(index, size, type, normalized, stride, NULL);
+  return env.Null();
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glGenBuffer(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  GLuint result = 0;
+  this->instance->glGenBuffers(1, &result);
+  return Napi::Number::New(env, result);
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glBufferData(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 4) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+  }
+
+  GLenum target = info[0].As<Napi::Number>().Int32Value();
+  auto size = info[1].As<Napi::Number>().Int32Value();
+  auto data = info[2].As<Napi::ArrayBuffer>();
+  GLenum usage = info[3].As<Napi::Number>().Int32Value();
+  this->instance->glBufferData(target, size, data.Data(), usage);
   return env.Null();
 }
