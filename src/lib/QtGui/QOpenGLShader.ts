@@ -1,13 +1,12 @@
 import addon from '../utils/addon';
 import { NativeElement, Component } from '../core/Component';
 
-
 export class QOpenGLShader extends Component {
     native: NativeElement;
 
     static readonly Vertex = 0x0001;
     static readonly Fragment = 0x0002;
-    static readonly Geometry = 0x0004	;
+    static readonly Geometry = 0x0004;
 
     constructor(type: number) {
         super();
@@ -16,10 +15,10 @@ export class QOpenGLShader extends Component {
     }
 
     compileSourceCode(source: string): boolean {
-      return this.native.compileSourceCode(source);
+        return this.native.compileSourceCode(source);
     }
 
     log(): string {
-      return this.native.log();
+        return this.native.log();
     }
 }

@@ -2,17 +2,17 @@
 
 #include "Extras/Utils/nutils.h"
 
-
 Napi::FunctionReference QOpenGLShaderWrap::constructor;
 
 Napi::Object QOpenGLShaderWrap::init(Napi::Env env, Napi::Object exports) {
   Napi::HandleScope scope(env);
   char CLASSNAME[] = "QOpenGLShader";
-  Napi::Function func = DefineClass(
-      env, CLASSNAME,
-      {InstanceMethod("compileSourceCode", &QOpenGLShaderWrap::compileSourceCode),
-      InstanceMethod("log", &QOpenGLShaderWrap::log),
-      COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QOpenGLShaderWrap)});
+  Napi::Function func =
+      DefineClass(env, CLASSNAME,
+                  {InstanceMethod("compileSourceCode",
+                                  &QOpenGLShaderWrap::compileSourceCode),
+                   InstanceMethod("log", &QOpenGLShaderWrap::log),
+                   COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QOpenGLShaderWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
   return exports;
@@ -29,7 +29,8 @@ QOpenGLShaderWrap::QOpenGLShaderWrap(const Napi::CallbackInfo& info)
 
   if (info.Length() == 1) {
     auto arg = info[0].As<Napi::Number>().Int32Value();
-    this->instance = new QOpenGLShader(static_cast<QOpenGLShader::ShaderType>(arg));
+    this->instance =
+        new QOpenGLShader(static_cast<QOpenGLShader::ShaderType>(arg));
   } else {
     Napi::TypeError::New(env, "Wrong number of arguments")
         .ThrowAsJavaScriptException();
@@ -41,16 +42,18 @@ QOpenGLShaderWrap::~QOpenGLShaderWrap() {
   extrautils::safeDelete(this->instance);
 }
 
-Napi::Value QOpenGLShaderWrap::compileSourceCode(const Napi::CallbackInfo& info) {
+Napi::Value QOpenGLShaderWrap::compileSourceCode(
+    const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
   if (info.Length() != 1) {
-      Napi::TypeError::New(env, "Wrong number of arguments")
-          .ThrowAsJavaScriptException();
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
   }
 
-  QString source = QString::fromStdString(info[0].As<Napi::String>().Utf8Value());
+  QString source =
+      QString::fromStdString(info[0].As<Napi::String>().Utf8Value());
   bool result = this->instance->compileSourceCode(source);
   return Napi::Boolean::New(env, result);
 }

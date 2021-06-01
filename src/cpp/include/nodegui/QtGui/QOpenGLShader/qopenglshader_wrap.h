@@ -8,7 +8,8 @@
 #include "Extras/Export/export.h"
 #include "core/Component/component_macro.h"
 
-class DLL_EXPORT QOpenGLShaderWrap : public Napi::ObjectWrap<QOpenGLShaderWrap> {
+class DLL_EXPORT QOpenGLShaderWrap
+    : public Napi::ObjectWrap<QOpenGLShaderWrap> {
   COMPONENT_WRAPPED_METHODS_DECLARATION
 
  private:

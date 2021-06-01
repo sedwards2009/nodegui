@@ -11,7 +11,8 @@ class DLL_EXPORT NOpenGLWidget : public QOpenGLWidget, public NodeWidget {
   Q_OBJECT
   NODEWIDGET_IMPLEMENTATIONS(QOpenGLWidget)
  public:
-  using QOpenGLWidget::QOpenGLWidget;  // inherit all constructors of QOpenGLWidget
+  using QOpenGLWidget::QOpenGLWidget;  // inherit all constructors of
+                                       // QOpenGLWidget
 
   void connectSignalsToEventEmitter() {
     QWIDGET_SIGNALS

@@ -7,7 +7,8 @@
 #include "Extras/Export/export.h"
 #include "core/Component/component_macro.h"
 
-class DLL_EXPORT QSurfaceFormatWrap : public Napi::ObjectWrap<QSurfaceFormatWrap> {
+class DLL_EXPORT QSurfaceFormatWrap
+    : public Napi::ObjectWrap<QSurfaceFormatWrap> {
   COMPONENT_WRAPPED_METHODS_DECLARATION
  private:
   QSurfaceFormat* instance;
@@ -28,5 +29,5 @@ class DLL_EXPORT QSurfaceFormatWrap : public Napi::ObjectWrap<QSurfaceFormatWrap
 };
 
 namespace StaticQSurfaceFormatWrapMethods {
-  DLL_EXPORT Napi::Value setDefaultFormat(const Napi::CallbackInfo& info);
+DLL_EXPORT Napi::Value setDefaultFormat(const Napi::CallbackInfo& info);
 }

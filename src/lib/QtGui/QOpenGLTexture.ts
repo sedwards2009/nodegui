@@ -4,10 +4,9 @@ import { checkIfNativeElement } from '../utils/helpers';
 import { QImage } from './QImage';
 
 enum MipMapGeneration {
-  GenerateMipMaps = 0,
-  DontGenerateMipMaps = 1
+    GenerateMipMaps = 0,
+    DontGenerateMipMaps = 1,
 }
-
 
 export class QOpenGLTexture extends Component {
     native: NativeElement;

@@ -32,7 +32,8 @@ Napi::Object QPainterWrap::init(Napi::Env env, Napi::Object exports) {
        InstanceMethod("drawConvexPolygon", &QPainterWrap::drawConvexPolygon),
        InstanceMethod("save", &QPainterWrap::save),
        InstanceMethod("restore", &QPainterWrap::restore),
-       InstanceMethod("beginNativePainting", &QPainterWrap::beginNativePainting),
+       InstanceMethod("beginNativePainting",
+                      &QPainterWrap::beginNativePainting),
        InstanceMethod("endNativePainting", &QPainterWrap::endNativePainting),
        COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QPainterWrap)});
   constructor = Napi::Persistent(func);

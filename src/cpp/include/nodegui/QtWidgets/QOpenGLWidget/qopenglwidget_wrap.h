@@ -8,7 +8,8 @@
 #include "QtWidgets/QWidget/qwidget_macro.h"
 #include "nopenglwidget.hpp"
 
-class DLL_EXPORT QOpenGLWidgetWrap : public Napi::ObjectWrap<QOpenGLWidgetWrap> {
+class DLL_EXPORT QOpenGLWidgetWrap
+    : public Napi::ObjectWrap<QOpenGLWidgetWrap> {
   QWIDGET_WRAPPED_METHODS_DECLARATION
  private:
   QPointer<NOpenGLWidget> instance;
@@ -22,7 +23,6 @@ class DLL_EXPORT QOpenGLWidgetWrap : public Napi::ObjectWrap<QOpenGLWidgetWrap> 
   static Napi::FunctionReference constructor;
   // wrapped methods
 
-  
   // Napi::Value setSelection(const Napi::CallbackInfo& info);
   // Napi::Value selectionStart(const Napi::CallbackInfo& info);
   // Napi::Value setBuddy(const Napi::CallbackInfo& info);

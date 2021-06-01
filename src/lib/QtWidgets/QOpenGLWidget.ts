@@ -31,7 +31,7 @@ export class QOpenGLWidget extends NodeWidget<QOpenGLWidgetSignals> {
         this.setNodeParent(parent);
     }
 
-// TODO
+    // TODO
     // context() const
     // GLuint 	defaultFramebufferObject() const
     // void 	doneCurrent()
@@ -44,7 +44,6 @@ export class QOpenGLWidget extends NodeWidget<QOpenGLWidgetSignals> {
     // void 	setUpdateBehavior(QOpenGLWidget::UpdateBehavior updateBehavior)
     // GLenum 	textureFormat() const
     // QOpenGLWidget::UpdateBehavior	updateBehavior() const
-
 }
 
 export interface QOpenGLWidgetSignals extends QWidgetSignals {

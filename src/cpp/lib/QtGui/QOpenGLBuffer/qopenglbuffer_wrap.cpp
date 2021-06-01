@@ -1,24 +1,24 @@
-#include "QtCore/QObject/qobject_wrap.h"
 #include "QtGui/QOpenGLBuffer/qopenglbuffer_wrap.h"
 
 #include "Extras/Utils/nutils.h"
+#include "QtCore/QObject/qobject_wrap.h"
 
 Napi::FunctionReference QOpenGLBufferWrap::constructor;
 
 Napi::Object QOpenGLBufferWrap::init(Napi::Env env, Napi::Object exports) {
   Napi::HandleScope scope(env);
   char CLASSNAME[] = "QOpenGLBuffer";
-  Napi::Function func = DefineClass(
-      env, CLASSNAME, {
-      InstanceMethod("allocate", &QOpenGLBufferWrap::allocate),
-      InstanceMethod("bind", &QOpenGLBufferWrap::bind),
-      InstanceMethod("bufferId", &QOpenGLBufferWrap::bufferId),
-      InstanceMethod("create", &QOpenGLBufferWrap::create),
-      InstanceMethod("destroy", &QOpenGLBufferWrap::destroy),
-      InstanceMethod("release", &QOpenGLBufferWrap::release),
-      InstanceMethod("size", &QOpenGLBufferWrap::size),
-      InstanceMethod("write", &QOpenGLBufferWrap::release),
-      COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QOpenGLBufferWrap)});
+  Napi::Function func =
+      DefineClass(env, CLASSNAME,
+                  {InstanceMethod("allocate", &QOpenGLBufferWrap::allocate),
+                   InstanceMethod("bind", &QOpenGLBufferWrap::bind),
+                   InstanceMethod("bufferId", &QOpenGLBufferWrap::bufferId),
+                   InstanceMethod("create", &QOpenGLBufferWrap::create),
+                   InstanceMethod("destroy", &QOpenGLBufferWrap::destroy),
+                   InstanceMethod("release", &QOpenGLBufferWrap::release),
+                   InstanceMethod("size", &QOpenGLBufferWrap::size),
+                   InstanceMethod("write", &QOpenGLBufferWrap::release),
+                   COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QOpenGLBufferWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
   return exports;
@@ -43,9 +43,7 @@ QOpenGLBufferWrap::QOpenGLBufferWrap(const Napi::CallbackInfo& info)
   this->rawData = extrautils::configureComponent(this->getInternalInstance());
 }
 
-QOpenGLBufferWrap::~QOpenGLBufferWrap() {
-  delete this->instance;
-}
+QOpenGLBufferWrap::~QOpenGLBufferWrap() { delete this->instance; }
 
 Napi::Value QOpenGLBufferWrap::allocate(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();

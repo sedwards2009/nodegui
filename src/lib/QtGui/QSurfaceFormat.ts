@@ -1,8 +1,6 @@
 import addon from '../utils/addon';
 import { NativeElement, Component } from '../core/Component';
-import { checkIfNativeElement } from '../utils/helpers';
 import { OpenGLContextProfile } from '../QtEnums';
-
 
 export class QSurfaceFormat extends Component {
     native: NativeElement;
@@ -26,12 +24,10 @@ export class QSurfaceFormat extends Component {
 
     setMajorVersion(version: number): void {
         this.native.setMajorVersion(version);
-
     }
 
     setMinorVersion(version: number): void {
         this.native.setMinorVersion(version);
-
     }
 
     static setDefaultFormat(format: QSurfaceFormat): void {

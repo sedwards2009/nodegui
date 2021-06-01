@@ -7,7 +7,8 @@
 #include "Extras/Export/export.h"
 #include "core/Component/component_macro.h"
 
-class DLL_EXPORT QOpenGLExtraFunctionsWrap : public Napi::ObjectWrap<QOpenGLExtraFunctionsWrap> {
+class DLL_EXPORT QOpenGLExtraFunctionsWrap
+    : public Napi::ObjectWrap<QOpenGLExtraFunctionsWrap> {
   COMPONENT_WRAPPED_METHODS_DECLARATION
  private:
   QOpenGLExtraFunctions* instance;

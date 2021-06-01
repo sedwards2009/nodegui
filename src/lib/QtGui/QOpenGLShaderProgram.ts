@@ -3,7 +3,6 @@ import { NativeElement, Component } from '../core/Component';
 import { QObject } from '../QtCore/QObject';
 import { QOpenGLShader } from './QOpenGLShader';
 
-
 export class QOpenGLShaderProgram extends Component {
     native: NativeElement;
 
@@ -56,7 +55,7 @@ export class QOpenGLShaderProgram extends Component {
         this.native.setUniformMatrix4fv(location, data.buffer);
     }
 
-    setAttributeBuffer(location: number, type: number, offset: number, tupleSize: number, stride: number=0): void {
+    setAttributeBuffer(location: number, type: number, offset: number, tupleSize: number, stride = 0): void {
         this.native.setAttributeBuffer(location, type, offset, tupleSize, stride);
     }
 

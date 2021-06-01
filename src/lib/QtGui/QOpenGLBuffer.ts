@@ -1,12 +1,11 @@
 import addon from '../utils/addon';
 import { NativeElement, Component } from '../core/Component';
-import { checkIfNativeElement } from '../utils/helpers';
 
 export enum QOpenGLBufferType {
-  VertexBuffer=0x8892,
-  IndexBuffer=0x8893,
-  PixelPackBuffer=0x88EB,
-  PixelUnpackBuffer=0x88EC
+    VertexBuffer = 0x8892,
+    IndexBuffer = 0x8893,
+    PixelPackBuffer = 0x88eb,
+    PixelUnpackBuffer = 0x88ec,
 }
 
 export class QOpenGLBuffer extends Component {
@@ -45,7 +44,7 @@ export class QOpenGLBuffer extends Component {
         this.native.write(offset, arrayBuffer, count);
     }
 
-    size(): number  {
+    size(): number {
         return this.native.size();
     }
 }

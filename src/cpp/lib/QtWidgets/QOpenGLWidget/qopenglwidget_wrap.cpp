@@ -15,24 +15,28 @@ Napi::Object QOpenGLWidgetWrap::init(Napi::Env env, Napi::Object exports) {
   char CLASSNAME[] = "QOpenGLWidget";
   Napi::Function func = DefineClass(
       env, CLASSNAME,
-      {//InstanceMethod("setSelection", &QLabelWrap::setSelection),
-      //  InstanceMethod("selectionStart", &QLabelWrap::selectionStart),
-      //  InstanceMethod("setBuddy", &QLabelWrap::setBuddy),
-      //  InstanceMethod("clear", &QLabelWrap::clear),
-      //  InstanceMethod("setMovie", &QLabelWrap::setMovie),
-      //  InstanceMethod("setNumDouble", &QLabelWrap::setNumDouble),
-      //  InstanceMethod("setNumInt", &QLabelWrap::setNumInt),
-      //  InstanceMethod("setPicture", &QLabelWrap::setPicture),
-      //  InstanceMethod("setPixmap", &QLabelWrap::setPixmap),
+      {// InstanceMethod("setSelection", &QLabelWrap::setSelection),
+       //  InstanceMethod("selectionStart", &QLabelWrap::selectionStart),
+       //  InstanceMethod("setBuddy", &QLabelWrap::setBuddy),
+       //  InstanceMethod("clear", &QLabelWrap::clear),
+       //  InstanceMethod("setMovie", &QLabelWrap::setMovie),
+       //  InstanceMethod("setNumDouble", &QLabelWrap::setNumDouble),
+       //  InstanceMethod("setNumInt", &QLabelWrap::setNumInt),
+       //  InstanceMethod("setPicture", &QLabelWrap::setPicture),
+       //  InstanceMethod("setPixmap", &QLabelWrap::setPixmap),
        QWIDGET_WRAPPED_METHODS_EXPORT_DEFINE(QOpenGLWidgetWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
   return exports;
 }
 
-NOpenGLWidget* QOpenGLWidgetWrap::getInternalInstance() { return this->instance; }
+NOpenGLWidget* QOpenGLWidgetWrap::getInternalInstance() {
+  return this->instance;
+}
 
-QOpenGLWidgetWrap::~QOpenGLWidgetWrap() { extrautils::safeDelete(this->instance); }
+QOpenGLWidgetWrap::~QOpenGLWidgetWrap() {
+  extrautils::safeDelete(this->instance);
+}
 
 QOpenGLWidgetWrap::QOpenGLWidgetWrap(const Napi::CallbackInfo& info)
     : Napi::ObjectWrap<QOpenGLWidgetWrap>(info) {
@@ -136,7 +140,8 @@ QOpenGLWidgetWrap::QOpenGLWidgetWrap(const Napi::CallbackInfo& info)
 //   Napi::HandleScope scope(env);
 
 //   Napi::Object pixmapObject = info[0].As<Napi::Object>();
-//   QPixmapWrap* pixmapWrap = Napi::ObjectWrap<QPixmapWrap>::Unwrap(pixmapObject);
+//   QPixmapWrap* pixmapWrap =
+//   Napi::ObjectWrap<QPixmapWrap>::Unwrap(pixmapObject);
 //   this->instance->setPixmap(*pixmapWrap->getInternalInstance());
 //   return env.Null();
 // }

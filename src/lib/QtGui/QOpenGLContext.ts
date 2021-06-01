@@ -4,7 +4,6 @@ import { checkIfNativeElement } from '../utils/helpers';
 import { QObject } from '../QtCore/QObject';
 import { QOpenGLExtraFunctions } from './QOpenGLExtraFunctions';
 
-
 export class QOpenGLContext extends Component {
     native: NativeElement;
 
@@ -31,7 +30,7 @@ export class QOpenGLContext extends Component {
         return new QOpenGLExtraFunctions(this.native.extraFunctions());
     }
 
-	isOpenGLES(): boolean {
+    isOpenGLES(): boolean {
         return this.native.isOpenGLES();
     }
 
