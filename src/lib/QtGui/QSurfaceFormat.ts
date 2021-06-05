@@ -5,9 +5,13 @@ import { OpenGLContextProfile } from '../QtEnums';
 export class QSurfaceFormat extends Component {
     native: NativeElement;
 
-    constructor() {
+    constructor(native?: any) {
         super();
-        this.native = new addon.QSurfaceFormat();
+        if (native != null) {
+            this.native = native;
+        } else {
+            this.native = new addon.QSurfaceFormat();
+        }
     }
 
     setDepthBufferSize(depth: number): void {
@@ -16,6 +20,10 @@ export class QSurfaceFormat extends Component {
 
     setStencilBufferSize(size: number): void {
         this.native.setStencilBufferSize(size);
+    }
+
+    profile(): OpenGLContextProfile {
+        return this.native.profile();
     }
 
     setProfile(profile: OpenGLContextProfile): void {
@@ -32,5 +40,9 @@ export class QSurfaceFormat extends Component {
 
     static setDefaultFormat(format: QSurfaceFormat): void {
         addon.QSurfaceFormat.setDefaultFormat(format.native);
+    }
+
+    static defaultFormat(): QSurfaceFormat {
+        return new QSurfaceFormat(addon.QSurfaceFormat.getDefaultFormat());
     }
 }

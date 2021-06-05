@@ -17,6 +17,8 @@ Napi::Object QSurfaceFormatWrap::init(Napi::Env env, Napi::Object exports) {
        InstanceMethod("setProfile", &QSurfaceFormatWrap::setProfile),
        InstanceMethod("setStencilBufferSize",
                       &QSurfaceFormatWrap::setStencilBufferSize),
+       StaticMethod("defaultFormat",
+                    &StaticQSurfaceFormatWrapMethods::defaultFormat),
        StaticMethod("setDefaultFormat",
                     &StaticQSurfaceFormatWrapMethods::setDefaultFormat),
        COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QOpenGLBufferWrap)});
@@ -60,6 +62,14 @@ Napi::Value QSurfaceFormatWrap::setStencilBufferSize(
   return env.Null();
 }
 
+Napi::Value QSurfaceFormatWrap::profile(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  int profile = info[0].As<Napi::Number>().Int32Value();
+  return Napi::Number::New(env, this->instance->profile());
+}
+
 Napi::Value QSurfaceFormatWrap::setProfile(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
@@ -88,6 +98,20 @@ Napi::Value QSurfaceFormatWrap::setMinorVersion(
   int version = info[0].As<Napi::Number>().Int32Value();
   this->instance->setMinorVersion(version);
   return env.Null();
+}
+
+Napi::Value StaticQSurfaceFormatWrapMethods::defaultFormat(
+    const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  Napi::Object surfaceFormatObject = info[0].As<Napi::Object>();
+  QSurfaceFormatWrap* surfaceFormatWrap =
+      Napi::ObjectWrap<QSurfaceFormatWrap>::Unwrap(surfaceFormatObject);
+
+  auto instance = QSurfaceFormatWrap::constructor.New(
+      {Napi::External<QSurfaceFormat>::New(env, new QSurfaceFormat(QSurfaceFormat::defaultFormat()))});
+  return instance;
 }
 
 Napi::Value StaticQSurfaceFormatWrapMethods::setDefaultFormat(

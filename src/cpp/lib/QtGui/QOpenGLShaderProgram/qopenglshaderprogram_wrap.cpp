@@ -13,9 +13,13 @@ Napi::Object QOpenGLShaderProgramWrap::init(Napi::Env env,
   Napi::Function func = DefineClass(
       env, CLASSNAME,
       {InstanceMethod("addShader", &QOpenGLShaderProgramWrap::addShader),
+       InstanceMethod("addShaderFromSourceCode",
+                      &QOpenGLShaderProgramWrap::addShaderFromSourceCode),
        InstanceMethod("attributeLocation",
                       &QOpenGLShaderProgramWrap::attributeLocation),
        InstanceMethod("bind", &QOpenGLShaderProgramWrap::bind),
+       InstanceMethod("bindAttributeLocation",
+                      &QOpenGLShaderProgramWrap::bindAttributeLocation),
        InstanceMethod("disableAttributeArray",
                       &QOpenGLShaderProgramWrap::disableAttributeArray),
        InstanceMethod("enableAttributeArray",
@@ -88,12 +92,44 @@ Napi::Value QOpenGLShaderProgramWrap::addShader(
   return Napi::Boolean::New(env, result);
 }
 
+Napi::Value QOpenGLShaderProgramWrap::addShaderFromSourceCode(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 2) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+  }
+
+  GLint type = info[0].As<Napi::Number>().Int32Value();
+  QString source =
+      QString::fromStdString(info[1].As<Napi::String>().Utf8Value());
+  bool result = this->instance->addShaderFromSourceCode(static_cast<QOpenGLShader::ShaderTypeBit>(type), source);
+  return Napi::Boolean::New(env, result);
+}
+
 Napi::Value QOpenGLShaderProgramWrap::bind(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
   bool result = this->instance->bind();
   return Napi::Boolean::New(env, result);
+}
+
+Napi::Value QOpenGLShaderProgramWrap::bindAttributeLocation(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 2) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+  }
+
+  QString name =
+      QString::fromStdString(info[0].As<Napi::String>().Utf8Value());
+  GLint location = info[1].As<Napi::Number>().Int32Value();
+  this->instance->bindAttributeLocation(name, location);
+  return env.Null();
 }
 
 Napi::Value QOpenGLShaderProgramWrap::link(const Napi::CallbackInfo& info) {

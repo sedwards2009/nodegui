@@ -29,6 +29,14 @@ Napi::Object QOpenGLExtraFunctionsWrap::init(Napi::Env env,
        InstanceMethod("glGenVertexArray",
                       &QOpenGLExtraFunctionsWrap::glGenVertexArray),
        InstanceMethod("glGetString", &QOpenGLExtraFunctionsWrap::glGetString),
+       InstanceMethod("glUniform1fv", &QOpenGLExtraFunctionsWrap::glUniform1fv),
+       InstanceMethod("glUniform2fv", &QOpenGLExtraFunctionsWrap::glUniform2fv),
+       InstanceMethod("glUniform3fv", &QOpenGLExtraFunctionsWrap::glUniform3fv),
+       InstanceMethod("glUniform4fv", &QOpenGLExtraFunctionsWrap::glUniform4fv),
+       InstanceMethod("glUniform1iv", &QOpenGLExtraFunctionsWrap::glUniform1iv),
+       InstanceMethod("glUniform2iv", &QOpenGLExtraFunctionsWrap::glUniform2iv),
+       InstanceMethod("glUniform3iv", &QOpenGLExtraFunctionsWrap::glUniform3iv),
+       InstanceMethod("glUniform4iv", &QOpenGLExtraFunctionsWrap::glUniform4iv),
        InstanceMethod("glUseProgram", &QOpenGLExtraFunctionsWrap::glUseProgram),
        InstanceMethod("glVertexAttribPointer",
                       &QOpenGLExtraFunctionsWrap::glVertexAttribPointer),
@@ -296,7 +304,7 @@ Napi::Value QOpenGLExtraFunctionsWrap::glVertexAttribPointer(
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
-  if (info.Length() != 5) {
+  if (info.Length() != 6) {
     Napi::TypeError::New(env, "Wrong number of arguments")
         .ThrowAsJavaScriptException();
   }
@@ -306,8 +314,9 @@ Napi::Value QOpenGLExtraFunctionsWrap::glVertexAttribPointer(
   GLenum type = info[2].As<Napi::Number>().Uint32Value();
   GLboolean normalized = info[3].As<Napi::Boolean>().ToBoolean();
   GLsizei stride = info[4].As<Napi::Number>().Uint32Value();
+  uint pointer_offset = info[5].As<Napi::Number>().Uint32Value();
   this->instance->glVertexAttribPointer(index, size, type, normalized, stride,
-                                        NULL);
+                                        reinterpret_cast<void *>(pointer_offset));
   return env.Null();
 }
 
@@ -332,9 +341,145 @@ Napi::Value QOpenGLExtraFunctionsWrap::glBufferData(
   }
 
   GLenum target = info[0].As<Napi::Number>().Int32Value();
-  auto size = info[1].As<Napi::Number>().Int32Value();
-  auto data = info[2].As<Napi::ArrayBuffer>();
+  GLint size = info[1].As<Napi::Number>().Int32Value();
+  Napi::ArrayBuffer data = info[2].As<Napi::ArrayBuffer>();
   GLenum usage = info[3].As<Napi::Number>().Int32Value();
   this->instance->glBufferData(target, size, data.Data(), usage);
+  return env.Null();
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glUniform1fv(
+    const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 3) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+  }
+
+  GLint location = info[0].As<Napi::Number>().Int32Value();
+  GLsizei count = info[1].As<Napi::Number>().Int32Value();
+  Napi::ArrayBuffer data = info[1].As<Napi::ArrayBuffer>();
+  this->instance->glUniform1fv(location, count, static_cast<const GLfloat *>(data.Data()));
+  return env.Null();
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glUniform2fv(
+    const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 3) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+  }
+
+  GLint location = info[0].As<Napi::Number>().Int32Value();
+  GLsizei count = info[1].As<Napi::Number>().Int32Value();
+  Napi::ArrayBuffer data = info[2].As<Napi::ArrayBuffer>();
+  this->instance->glUniform2fv(location, count, static_cast<const GLfloat *>(data.Data()));
+  return env.Null();
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glUniform3fv(
+    const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 3) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+  }
+
+  GLint location = info[0].As<Napi::Number>().Int32Value();
+  GLsizei count = info[1].As<Napi::Number>().Int32Value();
+  Napi::ArrayBuffer data = info[2].As<Napi::ArrayBuffer>();
+  this->instance->glUniform3fv(location, count, static_cast<const GLfloat *>(data.Data()));
+  return env.Null();
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glUniform4fv(
+    const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 3) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+  }
+
+  GLint location = info[0].As<Napi::Number>().Int32Value();
+  GLsizei count = info[1].As<Napi::Number>().Int32Value();
+  Napi::ArrayBuffer data = info[2].As<Napi::ArrayBuffer>();
+  this->instance->glUniform4fv(location, count, static_cast<const GLfloat *>(data.Data()));
+  return env.Null();
+}
+//---
+Napi::Value QOpenGLExtraFunctionsWrap::glUniform1iv(
+    const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 3) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+  }
+
+  GLint location = info[0].As<Napi::Number>().Int32Value();
+  GLsizei count = info[1].As<Napi::Number>().Int32Value();
+  Napi::ArrayBuffer data = info[1].As<Napi::ArrayBuffer>();
+  this->instance->glUniform1iv(location, count, static_cast<const GLint *>(data.Data()));
+  return env.Null();
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glUniform2iv(
+    const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 3) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+  }
+
+  GLint location = info[0].As<Napi::Number>().Int32Value();
+  GLsizei count = info[1].As<Napi::Number>().Int32Value();
+  Napi::ArrayBuffer data = info[2].As<Napi::ArrayBuffer>();
+  this->instance->glUniform2iv(location, count, static_cast<const GLint *>(data.Data()));
+  return env.Null();
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glUniform3iv(
+    const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 3) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+  }
+
+  GLint location = info[0].As<Napi::Number>().Int32Value();
+  GLsizei count = info[1].As<Napi::Number>().Int32Value();
+  Napi::ArrayBuffer data = info[2].As<Napi::ArrayBuffer>();
+  this->instance->glUniform3iv(location, count, static_cast<const GLint *>(data.Data()));
+  return env.Null();
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glUniform4iv(
+    const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 3) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+  }
+
+  GLint location = info[0].As<Napi::Number>().Int32Value();
+  GLsizei count = info[1].As<Napi::Number>().Int32Value();
+  Napi::ArrayBuffer data = info[2].As<Napi::ArrayBuffer>();
+  this->instance->glUniform4iv(location, count, static_cast<const GLint *>(data.Data()));
   return env.Null();
 }

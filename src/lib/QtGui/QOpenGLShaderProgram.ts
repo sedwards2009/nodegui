@@ -19,6 +19,15 @@ export class QOpenGLShaderProgram extends Component {
         return this.native.addShader(shader.native);
     }
 
+    addShaderFromSourceCode(type: number, source: string): boolean {
+        return this.native.addShaderFromSourceCode(type, source);
+    }
+
+// Remove, use QOpenGLFunctions
+    bindAttributeLocation(name: string, location: number): void {
+        this.native.bindAttributeLocation(name, location);
+    }
+
     bind(): boolean {
         return this.native.bind();
     }
@@ -27,6 +36,7 @@ export class QOpenGLShaderProgram extends Component {
         return this.native.link();
     }
 
+// Remove, use QOpenGLFunctions
     attributeLocation(attribute: string): number {
         return this.native.attributeLocation(attribute);
     }
@@ -35,22 +45,27 @@ export class QOpenGLShaderProgram extends Component {
         this.native.release();
     }
 
+// Remove, use QOpenGLFunctions
     uniformLocation(uniform: string): number {
         return this.native.uniformLocation(uniform);
     }
 
+// Remove, use QOpenGLFunctions
     setUniformValue1i(location: number, value: number): void {
         this.native.setUniformValue1i(location, value);
     }
 
+// Remove, use QOpenGLFunctions
     disableAttributeArray(location: number): void {
         this.native.disableAttributeArray(location);
     }
 
+// Remove, use QOpenGLFunctions
     enableAttributeArray(location: number): void {
         this.native.enableAttributeArray(location);
     }
 
+// Remove, use QOpenGLFunctions
     setUniformMatrix4fv(location: number, data: Float32Array): void {
         this.native.setUniformMatrix4fv(location, data.buffer);
     }

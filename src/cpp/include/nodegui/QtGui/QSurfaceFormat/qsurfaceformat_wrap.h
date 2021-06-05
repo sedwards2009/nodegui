@@ -22,6 +22,7 @@ class DLL_EXPORT QSurfaceFormatWrap
 
   // Wrapped methods
   Napi::Value setDepthBufferSize(const Napi::CallbackInfo& info);
+  Napi::Value profile(const Napi::CallbackInfo& info);
   Napi::Value setProfile(const Napi::CallbackInfo& info);
   Napi::Value setStencilBufferSize(const Napi::CallbackInfo& info);
   Napi::Value setMajorVersion(const Napi::CallbackInfo& info);
@@ -30,4 +31,5 @@ class DLL_EXPORT QSurfaceFormatWrap
 
 namespace StaticQSurfaceFormatWrapMethods {
 DLL_EXPORT Napi::Value setDefaultFormat(const Napi::CallbackInfo& info);
+DLL_EXPORT Napi::Value defaultFormat(const Napi::CallbackInfo& info);
 }

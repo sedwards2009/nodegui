@@ -25,3 +25,7 @@ export function wrapWithActivateUvLoop<T extends Function>(func: T): T {
     };
     return fn as any;
 }
+
+export function isTypedArray(arg: any): arg is NodeJS.TypedArray {
+    return arg.BYTES_PER_ELEMENT !== undefined && arg.buffer !== undefined;
+}

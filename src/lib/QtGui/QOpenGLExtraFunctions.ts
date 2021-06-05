@@ -1,6 +1,6 @@
 import addon from '../utils/addon';
 import { NativeElement, Component } from '../core/Component';
-import { checkIfNativeElement } from '../utils/helpers';
+import { checkIfNativeElement, isTypedArray } from '../utils/helpers';
 import { QOpenGLContext } from './QOpenGLContext';
 import { QOpenGLShaderProgram } from './QOpenGLShaderProgram';
 import { QOpenGLBuffer } from './QOpenGLBuffer';
@@ -419,9 +419,9 @@ export class QOpenGLExtraFunctions extends Component {
         this.native.glEnableVertexAttribArray(index);
     }
 
-    vertexAttribPointer(index: number, size: number, type: number, normalized: number | boolean, stride: number): void {
+    vertexAttribPointer(index: number, size: number, type: number, normalized: number | boolean, stride: number, pointer_offset: number): void {
         const normalizedBoolean = Boolean(normalized);
-        this.native.glVertexAttribPointer(index, size, type, normalizedBoolean, stride);
+        this.native.glVertexAttribPointer(index, size, type, normalizedBoolean, stride, pointer_offset);
     }
 
     genBuffers(numberOfBuffers: number): number[] {
@@ -432,7 +432,172 @@ export class QOpenGLExtraFunctions extends Component {
         return result;
     }
 
-    bufferData(target: number, size: number, arrayBuffer: ArrayBuffer, usage: number): void {
-        this.native.glBufferData(target, size, arrayBuffer, usage);
+    bufferData(target: number, arrayBuffer: ArrayBuffer | NodeJS.TypedArray, usage: number): void {
+        let buffer: ArrayBuffer;
+        let size = 0;
+
+        if (isTypedArray(arrayBuffer)) {
+            buffer = arrayBuffer.buffer;
+            size = arrayBuffer.byteLength;
+        } else {
+            buffer = arrayBuffer;
+            size = arrayBuffer.byteLength;
+        }
+
+        this.native.glBufferData(target, size, buffer, usage);
     }
+
+    uniform1f(location: number, data: number): void {
+        this.uniform1fv(location, 1, [data]);
+    }
+
+    uniform1fv(location: number, count: number, data: number[] |  Float32Array): void {
+        let buffer: ArrayBuffer;
+        if (isTypedArray(data)) {
+            buffer = data.buffer;
+        } else {
+            buffer = Float32Array.from(data).buffer;
+        }
+
+        if (count > buffer.byteLength / Float32Array.BYTES_PER_ELEMENT) {
+            throw new Error(`Parameter 'count' to uniform1fv() specifies more data than is available in parameter 'data'.`);
+        }
+
+        this.native.glUniform1fv(location, count, data[0]);
+    }
+
+    uniform2f(location: number, data1: number, data2: number): void {
+        this.uniform2fv(location, 1, [data1, data2]);
+    }
+
+    uniform2fv(location: number, count: number, data: number[] | Float32Array): void {
+        let buffer: ArrayBuffer;
+        if (isTypedArray(data)) {
+            buffer = data.buffer;
+        } else {
+            buffer = Float32Array.from(data).buffer;
+        }
+
+        if (count > buffer.byteLength / (2 * Float32Array.BYTES_PER_ELEMENT)) {
+            throw new Error(`Parameter 'count' to uniform2fv() specifies more data than is available in parameter 'data'.`);
+        }
+
+        this.native.glUniform2fv(location, count, buffer);
+    }
+
+    uniform3f(location: number, data1: number, data2: number, data3: number): void {
+        this.uniform3fv(location, 1, [data1, data2, data3]);
+    }
+
+    uniform3fv(location: number, count: number, data: number[] | Float32Array): void {
+        let buffer: ArrayBuffer;
+        if (isTypedArray(data)) {
+            buffer = data.buffer;
+        } else {
+            buffer = Float32Array.from(data).buffer;
+        }
+
+        if (count > buffer.byteLength / (3 * Float32Array.BYTES_PER_ELEMENT)) {
+            throw new Error(`Parameter 'count' to uniform3fv() specifies more data than is available in parameter 'data'.`);
+        }
+
+        this.native.glUniform3fv(location, count, buffer);
+    }
+
+    uniform4f(location: number, data1: number, data2: number, data3: number, data4: number): void {
+        this.uniform4fv(location, 1, [data1, data2, data3, data4]);
+    }
+
+    uniform4fv(location: number, count: number, data: number[] | Float32Array): void {
+        let buffer: ArrayBuffer;
+        if (isTypedArray(data)) {
+            buffer = data.buffer;
+        } else {
+            buffer = Float32Array.from(data).buffer;
+        }
+
+        if (count > buffer.byteLength / (4 * Float32Array.BYTES_PER_ELEMENT)) {
+            throw new Error(`Parameter 'count' to uniform4fv() specifies more data than is available in parameter 'data'.`);
+        }
+
+        this.native.glUniform4fv(location, count, buffer);
+    }
+
+//------
+    uniform1i(location: number, data: number): void {
+        this.uniform1iv(location, 1, [data]);
+    }
+
+    uniform1iv(location: number, count: number, data: number[] |  Int32Array): void {
+        let buffer: ArrayBuffer;
+        if (isTypedArray(data)) {
+            buffer = data.buffer;
+        } else {
+            buffer = Int32Array.from(data).buffer;
+        }
+
+        if (count > buffer.byteLength / Int32Array.BYTES_PER_ELEMENT) {
+            throw new Error(`Parameter 'count' to uniform1fv() specifies more data than is available in parameter 'data'.`);
+        }
+
+        this.native.glUniform1iv(location, count, data[0]);
+    }
+
+    uniform2i(location: number, data1: number, data2: number): void {
+        this.uniform2iv(location, 1, [data1, data2]);
+    }
+
+    uniform2iv(location: number, count: number, data: number[] | Int32Array): void {
+        let buffer: ArrayBuffer;
+        if (isTypedArray(data)) {
+            buffer = data.buffer;
+        } else {
+            buffer = Int32Array.from(data).buffer;
+        }
+
+        if (count > buffer.byteLength / (2 * Int32Array.BYTES_PER_ELEMENT)) {
+            throw new Error(`Parameter 'count' to uniform2fv() specifies more data than is available in parameter 'data'.`);
+        }
+
+        this.native.glUniform2iv(location, count, buffer);
+    }
+
+    uniform3i(location: number, data1: number, data2: number, data3: number): void {
+        this.uniform3iv(location, 1, [data1, data2, data3]);
+    }
+
+    uniform3iv(location: number, count: number, data: number[] | Int32Array): void {
+        let buffer: ArrayBuffer;
+        if (isTypedArray(data)) {
+            buffer = data.buffer;
+        } else {
+            buffer = Int32Array.from(data).buffer;
+        }
+
+        if (count > buffer.byteLength / (3 * Int32Array.BYTES_PER_ELEMENT)) {
+            throw new Error(`Parameter 'count' to uniform3fv() specifies more data than is available in parameter 'data'.`);
+        }
+
+        this.native.glUniform3iv(location, count, buffer);
+    }
+
+    uniform4i(location: number, data1: number, data2: number, data3: number, data4: number): void {
+        this.uniform4iv(location, 1, [data1, data2, data3, data4]);
+    }
+
+    uniform4iv(location: number, count: number, data: number[] | Int32Array): void {
+        let buffer: ArrayBuffer;
+        if (isTypedArray(data)) {
+            buffer = data.buffer;
+        } else {
+            buffer = Int32Array.from(data).buffer;
+        }
+
+        if (count > buffer.byteLength / (4 * Int32Array.BYTES_PER_ELEMENT)) {
+            throw new Error(`Parameter 'count' to uniform4fv() specifies more data than is available in parameter 'data'.`);
+        }
+
+        this.native.glUniform4iv(location, count, buffer);
+    }
+
 }

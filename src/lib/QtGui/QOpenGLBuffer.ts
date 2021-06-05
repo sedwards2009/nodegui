@@ -1,5 +1,6 @@
 import addon from '../utils/addon';
 import { NativeElement, Component } from '../core/Component';
+import { isTypedArray } from '../utils/helpers';
 
 export enum QOpenGLBufferType {
     VertexBuffer = 0x8892,
@@ -11,7 +12,7 @@ export enum QOpenGLBufferType {
 export class QOpenGLBuffer extends Component {
     native: NativeElement;
 
-    constructor(arg: QOpenGLBufferType) {
+    constructor(arg=QOpenGLBufferType.VertexBuffer) {
         super();
         this.native = new addon.QOpenGLBuffer(arg);
     }
@@ -40,8 +41,20 @@ export class QOpenGLBuffer extends Component {
         this.native.release();
     }
 
-    write(offset: number, arrayBuffer: ArrayBuffer, count: number): void {
-        this.native.write(offset, arrayBuffer, count);
+    write(offset: number, arrayBuffer: ArrayBuffer | NodeJS.TypedArray, count: number): void {
+        let buffer: ArrayBuffer;
+        let size = 0;
+        if (isTypedArray(arrayBuffer)) {
+            buffer = arrayBuffer.buffer;
+            size = arrayBuffer.byteLength;
+        } else {
+            buffer = arrayBuffer;
+            size = arrayBuffer.byteLength;
+        }
+        if (count > size) {
+            throw new Error('Argument "count" to QOpenGLBuffer.write() can\'t be bigger than the buffer size.');
+        }
+        this.native.write(offset, buffer, count);
     }
 
     size(): number {

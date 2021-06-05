@@ -42,6 +42,7 @@
 #include "QtGui/QOpenGLShader/qopenglshader_wrap.h"
 #include "QtGui/QOpenGLShaderProgram/qopenglshaderprogram_wrap.h"
 #include "QtGui/QOpenGLTexture/qopengltexture_wrap.h"
+#include "QtGui/QOpenGLVertexArrayObject/qopenglvertexarrayobject_wrap.h"
 #include "QtGui/QPen/qpen_wrap.h"
 #include "QtGui/QPicture/qpicture_wrap.h"
 #include "QtGui/QPixmap/qpixmap_wrap.h"
@@ -232,6 +233,7 @@ Napi::Object Main(Napi::Env env, Napi::Object exports) {
   QOpenGLShaderProgramWrap::init(env, exports);
   QSurfaceFormatWrap::init(env, exports);
   QOpenGLTextureWrap::init(env, exports);
+  QOpenGLVertexArrayObjectWrap::init(env, exports);
   return exports;
 }
 
