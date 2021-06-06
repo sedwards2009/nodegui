@@ -24,143 +24,142 @@ class DLL_EXPORT QOpenGLExtraFunctionsWrap
 
   // Open GL Functions
 
-  //void 	 glActiveTexture(GLenum texture)
-  //void 	 glAttachShader(GLuint program, GLuint shader)
-  //void 	 glBindAttribLocation(GLuint program, GLuint index, const char *name)
-  Napi::Value glBindBuffer(const Napi::CallbackInfo& info);
-  //void 	 glBindFramebuffer(GLenum target, GLuint framebuffer)
-  //void 	 glBindRenderbuffer(GLenum target, GLuint renderbuffer)
-  //void 	 glBindTexture(GLenum target, GLuint texture)
-  //void 	 glBlendColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
-  //void 	 glBlendEquation(GLenum mode)
-  //void 	 glBlendEquationSeparate(GLenum modeRGB, GLenum modeAlpha)
-  //void 	 glBlendFunc(GLenum sfactor, GLenum dfactor)
-  //void 	 glBlendFuncSeparate(GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha)
-  Napi::Value glBufferData(const Napi::CallbackInfo& info);
-  //void 	 glBufferSubData(GLenum target, qopengl_GLintptr offset, qopengl_GLsizeiptr size, const void *data)
-  //GLenum 	 glCheckFramebufferStatus(GLenum target)
-  Napi::Value glClear(const Napi::CallbackInfo& info);
-  Napi::Value glClearColor(const Napi::CallbackInfo& info);
-  //void 	 glClearDepthf(GLclampf depth)
-  //void 	 glClearStencil(GLint s)
-  //void 	 glColorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha)
-  //void 	 glCompileShader(GLuint shader)
-  //void 	 glCompressedTexImage2D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *data)
-  //void 	 glCompressedTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data)
-  //void 	 glCopyTexImage2D(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border)
-  //void 	 glCopyTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height)
-  //GLuint 	 glCreateProgram()
-  //GLuint 	 glCreateShader(GLenum type)
-  Napi::Value glCullFace(const Napi::CallbackInfo& info);
-  //void 	 glDeleteBuffers(GLsizei n, const GLuint *buffers)
-  //void 	 glDeleteFramebuffers(GLsizei n, const GLuint *framebuffers)
-  //void 	 glDeleteProgram(GLuint program)
-  //void 	 glDeleteRenderbuffers(GLsizei n, const GLuint *renderbuffers)
-  //void 	 glDeleteShader(GLuint shader)
-  //void 	 glDeleteTextures(GLsizei n, const GLuint *textures)
-  Napi::Value glDepthFunc(const Napi::CallbackInfo& info);
-  //void 	 glDepthMask(GLboolean flag)
-  //void 	 glDepthRangef(GLclampf zNear, GLclampf zFar)
-  //void 	 glDetachShader(GLuint program, GLuint shader)
-  Napi::Value glDisable(const Napi::CallbackInfo& info);
-  //void 	 glDisableVertexAttribArray(GLuint index)
-  Napi::Value glDrawArrays(const Napi::CallbackInfo& info);
-  //void 	 glDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices)
-  Napi::Value glEnable(const Napi::CallbackInfo& info);
-  Napi::Value glEnableVertexAttribArray(const Napi::CallbackInfo& info);
-  //void 	 glFinish()
-  //void 	 glFlush()
-  //void 	 glFramebufferRenderbuffer(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer)
-  //void 	 glFramebufferTexture2D(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
-  Napi::Value glFrontFace(const Napi::CallbackInfo& info);
-  Napi::Value glGenBuffer(const Napi::CallbackInfo& info);
-  //void 	 glGenerateMipmap(GLenum target)
-  //void 	 glGenFramebuffers(GLsizei n, GLuint *framebuffers)
-  //void 	 glGenRenderbuffers(GLsizei n, GLuint *renderbuffers)
-  //void 	 glGenTextures(GLsizei n, GLuint *textures)
-  //void 	 glGetActiveAttrib(GLuint program, GLuint index, GLsizei bufsize, GLsizei *length, GLint *size, GLenum *type, char *name)
-  //void 	 glGetActiveUniform(GLuint program, GLuint index, GLsizei bufsize, GLsizei *length, GLint *size, GLenum *type, char *name)
-  //void 	 glGetAttachedShaders(GLuint program, GLsizei maxcount, GLsizei *count, GLuint *shaders)
-  //GLint 	 glGetAttribLocation(GLuint program, const char *name)
-  //void 	 glGetBooleanv(GLenum pname, GLboolean *params)
-  //void 	 glGetBufferParameteriv(GLenum target, GLenum pname, GLint *params)
-  //GLenum 	 glGetError()
-  //void 	 glGetFloatv(GLenum pname, GLfloat *params)
-  //void 	 glGetFramebufferAttachmentParameteriv(GLenum target, GLenum attachment, GLenum pname, GLint *params)
-  //void 	 glGetIntegerv(GLenum pname, GLint *params)
-  //void 	 glGetProgramInfoLog(GLuint program, GLsizei bufsize, GLsizei *length, char *infolog)
-  //void 	 glGetProgramiv(GLuint program, GLenum pname, GLint *params)
-  //void 	 glGetRenderbufferParameteriv(GLenum target, GLenum pname, GLint *params)
-  //void 	 glGetShaderInfoLog(GLuint shader, GLsizei bufsize, GLsizei *length, char *infolog)
-  //void 	 glGetShaderiv(GLuint shader, GLenum pname, GLint *params)
-  //void 	 glGetShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision)
-  //void 	 glGetShaderSource(GLuint shader, GLsizei bufsize, GLsizei *length, char *source)
-  Napi::Value glGetString(const Napi::CallbackInfo& info);
-  //void 	 glGetTexParameterfv(GLenum target, GLenum pname, GLfloat *params)
-  //void 	 glGetTexParameteriv(GLenum target, GLenum pname, GLint *params)
-  //void 	 glGetUniformfv(GLuint program, GLint location, GLfloat *params)
-  //void 	 glGetUniformiv(GLuint program, GLint location, GLint *params)
-  //GLint 	 glGetUniformLocation(GLuint program, const char *name)
-  //void 	 glGetVertexAttribfv(GLuint index, GLenum pname, GLfloat *params)
-  //void 	 glGetVertexAttribiv(GLuint index, GLenum pname, GLint *params)
-  //void 	 glGetVertexAttribPointerv(GLuint index, GLenum pname, void **pointer)
-  //void 	 glHint(GLenum target, GLenum mode)
-  //GLboolean 	 glIsBuffer(GLuint buffer)
-  //GLboolean 	 glIsEnabled(GLenum cap)
-  //GLboolean 	 glIsFramebuffer(GLuint framebuffer)
-  //GLboolean 	 glIsProgram(GLuint program)
-  //GLboolean 	 glIsRenderbuffer(GLuint renderbuffer)
-  //GLboolean 	 glIsShader(GLuint shader)
-  //GLboolean 	 glIsTexture(GLuint texture)
-  //void 	 glLineWidth(GLfloat width)
-  //void 	 glLinkProgram(GLuint program)
-  //void 	 glPixelStorei(GLenum pname, GLint param)
-  //void 	 glPolygonOffset(GLfloat factor, GLfloat units)
-  //void 	 glReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels)
-  //void 	 glReleaseShaderCompiler()
-  //void 	 glRenderbufferStorage(GLenum target, GLenum internalformat, GLsizei width, GLsizei height)
-  //void 	 glSampleCoverage(GLclampf value, GLboolean invert)
-  //void 	 glScissor(GLint x, GLint y, GLsizei width, GLsizei height)
-  //void 	 glShaderBinary(GLint n, const GLuint *shaders, GLenum binaryformat, const void *binary, GLint length)
-  //void 	 glShaderSource(GLuint shader, GLsizei count, const char **string, const GLint *length)
-  //void 	 glStencilFunc(GLenum func, GLint ref, GLuint mask)
-  //void 	 glStencilFuncSeparate(GLenum face, GLenum func, GLint ref, GLuint mask)
-  //void 	 glStencilMask(GLuint mask)
-  //void 	 glStencilMaskSeparate(GLenum face, GLuint mask)
-  //void 	 glStencilOp(GLenum fail, GLenum zfail, GLenum zpass)
-  //void 	 glStencilOpSeparate(GLenum face, GLenum fail, GLenum zfail, GLenum zpass)
-  //void 	 glTexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
-  //void 	 glTexParameterf(GLenum target, GLenum pname, GLfloat param)
-  //void 	 glTexParameterfv(GLenum target, GLenum pname, const GLfloat *params)
-  //void 	 glTexParameteri(GLenum target, GLenum pname, GLint param)
-  //void 	 glTexParameteriv(GLenum target, GLenum pname, const GLint *params)
-  //void 	 glTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)
-  Napi::Value glUniform1fv(const Napi::CallbackInfo& info);
-  Napi::Value glUniform1iv(const Napi::CallbackInfo& info);
-  Napi::Value glUniform2fv(const Napi::CallbackInfo& info);
-  Napi::Value glUniform2iv(const Napi::CallbackInfo& info);
-  Napi::Value glUniform3fv(const Napi::CallbackInfo& info);
-  Napi::Value glUniform3iv(const Napi::CallbackInfo& info);
-  Napi::Value glUniform4fv(const Napi::CallbackInfo& info);
-  Napi::Value glUniform4iv(const Napi::CallbackInfo& info);
-  //void 	 glUniformMatrix2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
-  //void 	 glUniformMatrix3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
-  //void 	 glUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
-  Napi::Value glUseProgram(const Napi::CallbackInfo& info);
-  //void 	 glValidateProgram(GLuint program)
-  //void 	 glVertexAttrib1f(GLuint indx, GLfloat x)
-  //void 	 glVertexAttrib1fv(GLuint indx, const GLfloat *values)
-  //void 	 glVertexAttrib2f(GLuint indx, GLfloat x, GLfloat y)
-  //void 	 glVertexAttrib2fv(GLuint indx, const GLfloat *values)
-  //void 	 glVertexAttrib3f(GLuint indx, GLfloat x, GLfloat y, GLfloat z)
-  //void 	 glVertexAttrib3fv(GLuint indx, const GLfloat *values)
-  //void 	 glVertexAttrib4f(GLuint indx, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
-  //void 	 glVertexAttrib4fv(GLuint indx, const GLfloat *values)
-  Napi::Value glVertexAttribPointer(const Napi::CallbackInfo& info);
-  //void 	 glViewport(GLint x, GLint y, GLsizei width, GLsizei height)
-  //bool 	 hasOpenGLFeature(QOpenGLFunctions::OpenGLFeature feature) const
-  //void 	 initializeOpenGLFunctions()
-  Napi::Value initializeOpenGLFunctions(const Napi::CallbackInfo& info);
+  Napi::Value glActiveTexture(const Napi::CallbackInfo& info);
+  Napi::Value glAttachShader(const Napi::CallbackInfo& info);
+//void 	 glBindAttribLocation(GLuint program, GLuint index, const char *name)
+Napi::Value glBindBuffer(const Napi::CallbackInfo& info);
+  Napi::Value glBindFramebuffer(const Napi::CallbackInfo& info);
+  Napi::Value glBindRenderbuffer(const Napi::CallbackInfo& info);
+  Napi::Value glBindTexture(const Napi::CallbackInfo& info);
+  Napi::Value glBlendColor(const Napi::CallbackInfo& info);
+  Napi::Value glBlendEquation(const Napi::CallbackInfo& info);
+  Napi::Value glBlendEquationSeparate(const Napi::CallbackInfo& info);
+  Napi::Value glBlendFunc(const Napi::CallbackInfo& info);
+  Napi::Value glBlendFuncSeparate(const Napi::CallbackInfo& info);
+Napi::Value glBufferData(const Napi::CallbackInfo& info);
+//void 	 glBufferSubData(GLenum target, qopengl_GLintptr offset, qopengl_GLsizeiptr size, const void *data)
+  Napi::Value glCheckFramebufferStatus(const Napi::CallbackInfo& info);
+Napi::Value glClear(const Napi::CallbackInfo& info);
+Napi::Value glClearColor(const Napi::CallbackInfo& info);
+  Napi::Value glClearDepthf(const Napi::CallbackInfo& info);
+  Napi::Value glClearStencil(const Napi::CallbackInfo& info);
+  Napi::Value glColorMask(const Napi::CallbackInfo& info);
+  Napi::Value glCompileShader(const Napi::CallbackInfo& info);
+//void 	 glCompressedTexImage2D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *data)
+//void 	 glCompressedTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data)
+  Napi::Value glCopyTexImage2D(const Napi::CallbackInfo& info);
+  Napi::Value glCopyTexSubImage2D(const Napi::CallbackInfo& info);
+  Napi::Value glCreateProgram(const Napi::CallbackInfo& info);
+  Napi::Value glCreateShader(const Napi::CallbackInfo& info);
+Napi::Value glCullFace(const Napi::CallbackInfo& info);
+//void 	 glDeleteBuffers(GLsizei n, const GLuint *buffers)
+//void 	 glDeleteFramebuffers(GLsizei n, const GLuint *framebuffers)
+  Napi::Value glDeleteProgram(const Napi::CallbackInfo& info);
+//void 	 glDeleteRenderbuffers(GLsizei n, const GLuint *renderbuffers)
+  Napi::Value glDeleteShader(const Napi::CallbackInfo& info);
+//void 	 glDeleteTextures(GLsizei n, const GLuint *textures)
+Napi::Value glDepthFunc(const Napi::CallbackInfo& info);
+  Napi::Value glDepthMask(const Napi::CallbackInfo& info);
+  Napi::Value glDepthRangef(const Napi::CallbackInfo& info);
+  Napi::Value glDetachShader(const Napi::CallbackInfo& info);
+Napi::Value glDisable(const Napi::CallbackInfo& info);
+  Napi::Value glDisableVertexAttribArray(const Napi::CallbackInfo& info);
+Napi::Value glDrawArrays(const Napi::CallbackInfo& info);
+//void 	 glDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices)
+Napi::Value glEnable(const Napi::CallbackInfo& info);
+Napi::Value glEnableVertexAttribArray(const Napi::CallbackInfo& info);
+  Napi::Value glFinish(const Napi::CallbackInfo& info);
+  Napi::Value glFlush(const Napi::CallbackInfo& info);
+  Napi::Value glFramebufferRenderbuffer(const Napi::CallbackInfo& info);
+  Napi::Value glFramebufferTexture2D(const Napi::CallbackInfo& info);
+Napi::Value glFrontFace(const Napi::CallbackInfo& info);
+Napi::Value glGenBuffer(const Napi::CallbackInfo& info);
+  Napi::Value glGenerateMipmap(const Napi::CallbackInfo& info);
+//void 	 glGenFramebuffers(GLsizei n, GLuint *framebuffers)
+//void 	 glGenRenderbuffers(GLsizei n, GLuint *renderbuffers)
+//void 	 glGenTextures(GLsizei n, GLuint *textures)
+//void 	 glGetActiveAttrib(GLuint program, GLuint index, GLsizei bufsize, GLsizei *length, GLint *size, GLenum *type, char *name)
+//void 	 glGetActiveUniform(GLuint program, GLuint index, GLsizei bufsize, GLsizei *length, GLint *size, GLenum *type, char *name)
+//void 	 glGetAttachedShaders(GLuint program, GLsizei maxcount, GLsizei *count, GLuint *shaders)
+//GLint 	 glGetAttribLocation(GLuint program, const char *name)
+//void 	 glGetBooleanv(GLenum pname, GLboolean *params)
+//void 	 glGetBufferParameteriv(GLenum target, GLenum pname, GLint *params)
+  Napi::Value glGetError(const Napi::CallbackInfo& info);
+//void 	 glGetFloatv(GLenum pname, GLfloat *params)
+//void 	 glGetFramebufferAttachmentParameteriv(GLenum target, GLenum attachment, GLenum pname, GLint *params)
+//void 	 glGetIntegerv(GLenum pname, GLint *params)
+//void 	 glGetProgramInfoLog(GLuint program, GLsizei bufsize, GLsizei *length, char *infolog)
+//void 	 glGetProgramiv(GLuint program, GLenum pname, GLint *params)
+//void 	 glGetRenderbufferParameteriv(GLenum target, GLenum pname, GLint *params)
+//void 	 glGetShaderInfoLog(GLuint shader, GLsizei bufsize, GLsizei *length, char *infolog)
+//void 	 glGetShaderiv(GLuint shader, GLenum pname, GLint *params)
+//void 	 glGetShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision)
+//void 	 glGetShaderSource(GLuint shader, GLsizei bufsize, GLsizei *length, char *source)
+Napi::Value glGetString(const Napi::CallbackInfo& info);
+//void 	 glGetTexParameterfv(GLenum target, GLenum pname, GLfloat *params)
+//void 	 glGetTexParameteriv(GLenum target, GLenum pname, GLint *params)
+//void 	 glGetUniformfv(GLuint program, GLint location, GLfloat *params)
+//void 	 glGetUniformiv(GLuint program, GLint location, GLint *params)
+//GLint 	 glGetUniformLocation(GLuint program, const char *name)
+//void 	 glGetVertexAttribfv(GLuint index, GLenum pname, GLfloat *params)
+//void 	 glGetVertexAttribiv(GLuint index, GLenum pname, GLint *params)
+//void 	 glGetVertexAttribPointerv(GLuint index, GLenum pname, void **pointer)
+  Napi::Value glHint(const Napi::CallbackInfo& info);
+  Napi::Value glIsBuffer(const Napi::CallbackInfo& info);
+  Napi::Value glIsEnabled(const Napi::CallbackInfo& info);
+  Napi::Value glIsFramebuffer(const Napi::CallbackInfo& info);
+  Napi::Value glIsProgram(const Napi::CallbackInfo& info);
+  Napi::Value glIsRenderbuffer(const Napi::CallbackInfo& info);
+  Napi::Value glIsShader(const Napi::CallbackInfo& info);
+  Napi::Value glIsTexture(const Napi::CallbackInfo& info);
+  Napi::Value glLineWidth(const Napi::CallbackInfo& info);
+  Napi::Value glLinkProgram(const Napi::CallbackInfo& info);
+  Napi::Value glPixelStorei(const Napi::CallbackInfo& info);
+  Napi::Value glPolygonOffset(const Napi::CallbackInfo& info);
+//void 	 glReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels)
+  Napi::Value glReleaseShaderCompiler(const Napi::CallbackInfo& info);
+  Napi::Value glRenderbufferStorage(const Napi::CallbackInfo& info);
+  Napi::Value glSampleCoverage(const Napi::CallbackInfo& info);
+  Napi::Value glScissor(const Napi::CallbackInfo& info);
+//void 	 glShaderBinary(GLint n, const GLuint *shaders, GLenum binaryformat, const void *binary, GLint length)
+//void 	 glShaderSource(GLuint shader, GLsizei count, const char **string, const GLint *length)
+  Napi::Value glStencilFunc(const Napi::CallbackInfo& info);
+  Napi::Value glStencilFuncSeparate(const Napi::CallbackInfo& info);
+  Napi::Value glStencilMask(const Napi::CallbackInfo& info);
+  Napi::Value glStencilMaskSeparate(const Napi::CallbackInfo& info);
+  Napi::Value glStencilOp(const Napi::CallbackInfo& info);
+  Napi::Value glStencilOpSeparate(const Napi::CallbackInfo& info);
+//void 	 glTexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+  Napi::Value glTexParameterf(const Napi::CallbackInfo& info);
+//void 	 glTexParameterfv(GLenum target, GLenum pname, const GLfloat *params)
+  Napi::Value glTexParameteri(const Napi::CallbackInfo& info);
+//void 	 glTexParameteriv(GLenum target, GLenum pname, const GLint *params)
+//void 	 glTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)
+Napi::Value glUniform1fv(const Napi::CallbackInfo& info);
+Napi::Value glUniform1iv(const Napi::CallbackInfo& info);
+Napi::Value glUniform2fv(const Napi::CallbackInfo& info);
+Napi::Value glUniform2iv(const Napi::CallbackInfo& info);
+Napi::Value glUniform3fv(const Napi::CallbackInfo& info);
+Napi::Value glUniform3iv(const Napi::CallbackInfo& info);
+Napi::Value glUniform4fv(const Napi::CallbackInfo& info);
+Napi::Value glUniform4iv(const Napi::CallbackInfo& info);
+//void 	 glUniformMatrix2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+//void 	 glUniformMatrix3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+//void 	 glUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+Napi::Value glUseProgram(const Napi::CallbackInfo& info);
+  Napi::Value glValidateProgram(const Napi::CallbackInfo& info);
+  Napi::Value glVertexAttrib1f(const Napi::CallbackInfo& info);
+//void 	 glVertexAttrib1fv(GLuint indx, const GLfloat *values)
+  Napi::Value glVertexAttrib2f(const Napi::CallbackInfo& info);
+//void 	 glVertexAttrib2fv(GLuint indx, const GLfloat *values)
+  Napi::Value glVertexAttrib3f(const Napi::CallbackInfo& info);
+//void 	 glVertexAttrib3fv(GLuint indx, const GLfloat *values)
+  Napi::Value glVertexAttrib4f(const Napi::CallbackInfo& info);
+//void 	 glVertexAttrib4fv(GLuint indx, const GLfloat *values)
+Napi::Value glVertexAttribPointer(const Napi::CallbackInfo& info);
+  Napi::Value glViewport(const Napi::CallbackInfo& info);
+//bool 	 hasOpenGLFeature(QOpenGLFunctions::OpenGLFeature feature) const
+Napi::Value initializeOpenGLFunctions(const Napi::CallbackInfo& info);
 
   // Extra Open GL Functions
 

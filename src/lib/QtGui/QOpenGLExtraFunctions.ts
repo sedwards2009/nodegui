@@ -599,5 +599,247 @@ export class QOpenGLExtraFunctions extends Component {
 
         this.native.glUniform4iv(location, count, buffer);
     }
+    activeTexture(texture: number): void {
+        this.native.glActiveTexture(texture);
+    }
 
+    attachShader(program: number, shader: number): void {
+        this.native.glAttachShader(program, shader);
+    }
+
+    bindFramebuffer(target: number, framebuffer: number): void {
+        this.native.glBindFramebuffer(target, framebuffer);
+    }
+
+    bindRenderbuffer(target: number, renderbuffer: number): void {
+        this.native.glBindRenderbuffer(target, renderbuffer);
+    }
+
+    bindTexture(target: number, texture: number): void {
+        this.native.glBindTexture(target, texture);
+    }
+
+    blendColor(red: number, green: number, blue: number, alpha: number): void {
+        this.native.glBlendColor(red, green, blue, alpha);
+    }
+
+    blendEquation(mode: number): void {
+        this.native.glBlendEquation(mode);
+    }
+
+    blendEquationSeparate(modeRGB: number, modeAlpha: number): void {
+        this.native.glBlendEquationSeparate(modeRGB, modeAlpha);
+    }
+
+    blendFunc(sfactor: number, dfactor: number): void {
+        this.native.glBlendFunc(sfactor, dfactor);
+    }
+
+    blendFuncSeparate(srcRGB: number, dstRGB: number, srcAlpha: number, dstAlpha: number): void {
+        this.native.glBlendFuncSeparate(srcRGB, dstRGB, srcAlpha, dstAlpha);
+    }
+
+    checkFramebufferStatus(target: number): number {
+        return this.native.glCheckFramebufferStatus(target);
+    }
+
+    clearDepthf(depth: number): void {
+        this.native.glClearDepthf(depth);
+    }
+
+    clearStencil(s: number): void {
+        this.native.glClearStencil(s);
+    }
+
+    colorMask(red: boolean, green: boolean, blue: boolean, alpha: boolean): void {
+        this.native.glColorMask(red, green, blue, alpha);
+    }
+
+    compileShader(shader: number): void {
+        this.native.glCompileShader(shader);
+    }
+
+    copyTexImage2D(target: number, level: number, internalformat: number, x: number, y: number, width: number, height: number, border: number): void {
+        this.native.glCopyTexImage2D(target, level, internalformat, x, y, width, height, border);
+    }
+
+    copyTexSubImage2D(target: number, level: number, xoffset: number, yoffset: number, x: number, y: number, width: number, height: number): void {
+        this.native.glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
+    }
+
+    createProgram(): number {
+        return this.native.glCreateProgram();
+    }
+
+    createShader(type: number): number {
+        return this.native.glCreateShader(type);
+    }
+
+    deleteProgram(program: number): void {
+        this.native.glDeleteProgram(program);
+    }
+
+    deleteShader(shader: number): void {
+        this.native.glDeleteShader(shader);
+    }
+
+    depthMask(flag: boolean): void {
+        this.native.glDepthMask(flag);
+    }
+
+    depthRangef(zNear: number, zFar: number): void {
+        this.native.glDepthRangef(zNear, zFar);
+    }
+
+    detachShader(program: number, shader: number): void {
+        this.native.glDetachShader(program, shader);
+    }
+
+    disableVertexAttribArray(index: number): void {
+        this.native.glDisableVertexAttribArray(index);
+    }
+
+    finish(): void {
+        this.native.glFinish();
+    }
+
+    flush(): void {
+        this.native.glFlush();
+    }
+
+    framebufferRenderbuffer(target: number, attachment: number, renderbuffertarget: number, renderbuffer: number): void {
+        this.native.glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer);
+    }
+
+    framebufferTexture2D(target: number, attachment: number, textarget: number, texture: number, level: number): void {
+        this.native.glFramebufferTexture2D(target, attachment, textarget, texture, level);
+    }
+
+    generateMipmap(target: number): void {
+        this.native.glGenerateMipmap(target);
+    }
+
+    getError(): number {
+        return this.native.glGetError();
+    }
+
+    hint(target: number, mode: number): void {
+        this.native.glHint(target, mode);
+    }
+
+    isBuffer(buffer: number): boolean {
+        return this.native.glIsBuffer(buffer);
+    }
+
+    isEnabled(cap: number): boolean {
+        return this.native.glIsEnabled(cap);
+    }
+
+    isFramebuffer(framebuffer: number): boolean {
+        return this.native.glIsFramebuffer(framebuffer);
+    }
+
+    isProgram(program: number): boolean {
+        return this.native.glIsProgram(program);
+    }
+
+    isRenderbuffer(renderbuffer: number): boolean {
+        return this.native.glIsRenderbuffer(renderbuffer);
+    }
+
+    isShader(shader: number): boolean {
+        return this.native.glIsShader(shader);
+    }
+
+    isTexture(texture: number): boolean {
+        return this.native.glIsTexture(texture);
+    }
+
+    lineWidth(width: number): void {
+        this.native.glLineWidth(width);
+    }
+
+    linkProgram(program: number): void {
+        this.native.glLinkProgram(program);
+    }
+
+    pixelStorei(pname: number, param: number): void {
+        this.native.glPixelStorei(pname, param);
+    }
+
+    polygonOffset(factor: number, units: number): void {
+        this.native.glPolygonOffset(factor, units);
+    }
+
+    releaseShaderCompiler(): void {
+        this.native.glReleaseShaderCompiler();
+    }
+
+    renderbufferStorage(target: number, internalformat: number, width: number, height: number): void {
+        this.native.glRenderbufferStorage(target, internalformat, width, height);
+    }
+
+    sampleCoverage(value: number, invert: boolean): void {
+        this.native.glSampleCoverage(value, invert);
+    }
+
+    scissor(x: number, y: number, width: number, height: number): void {
+        this.native.glScissor(x, y, width, height);
+    }
+
+    stencilFunc(func: number, ref: number, mask: number): void {
+        this.native.glStencilFunc(func, ref, mask);
+    }
+
+    stencilFuncSeparate(face: number, func: number, ref: number, mask: number): void {
+        this.native.glStencilFuncSeparate(face, func, ref, mask);
+    }
+
+    stencilMask(mask: number): void {
+        this.native.glStencilMask(mask);
+    }
+
+    stencilMaskSeparate(face: number, mask: number): void {
+        this.native.glStencilMaskSeparate(face, mask);
+    }
+
+    stencilOp(fail: number, zfail: number, zpass: number): void {
+        this.native.glStencilOp(fail, zfail, zpass);
+    }
+
+    stencilOpSeparate(face: number, fail: number, zfail: number, zpass: number): void {
+        this.native.glStencilOpSeparate(face, fail, zfail, zpass);
+    }
+
+    texParameterf(target: number, pname: number, param: number): void {
+        this.native.glTexParameterf(target, pname, param);
+    }
+
+    texParameteri(target: number, pname: number, param: number): void {
+        this.native.glTexParameteri(target, pname, param);
+    }
+
+    validateProgram(program: number): void {
+        this.native.glValidateProgram(program);
+    }
+
+    vertexAttrib1f(indx: number, x: number): void {
+        this.native.glVertexAttrib1f(indx, x);
+    }
+
+    vertexAttrib2f(indx: number, x: number, y: number): void {
+        this.native.glVertexAttrib2f(indx, x, y);
+    }
+
+    vertexAttrib3f(indx: number, x: number, y: number, z: number): void {
+        this.native.glVertexAttrib3f(indx, x, y, z);
+    }
+
+    vertexAttrib4f(indx: number, x: number, y: number, z: number, w: number): void {
+        this.native.glVertexAttrib4f(indx, x, y, z, w);
+    }
+
+    viewport(x: number, y: number, width: number, height: number): void {
+        this.native.glViewport(x, y, width, height);
+    }
 }
