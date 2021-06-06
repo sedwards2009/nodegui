@@ -842,4 +842,304 @@ export class QOpenGLExtraFunctions extends Component {
     viewport(x: number, y: number, width: number, height: number): void {
         this.native.glViewport(x, y, width, height);
     }
+
+    activeShaderProgram(pipeline: number, program: number): void {
+        this.native.glActiveShaderProgram(pipeline, program);
+    }
+
+    beginQuery(target: number, id: number): void {
+        this.native.glBeginQuery(target, id);
+    }
+
+    beginTransformFeedback(primitiveMode: number): void {
+        this.native.glBeginTransformFeedback(primitiveMode);
+    }
+
+    bindBufferBase(target: number, index: number, buffer: number): void {
+        this.native.glBindBufferBase(target, index, buffer);
+    }
+
+    bindImageTexture(unit: number, texture: number, level: number, layered: boolean, layer: number, access: number, format: number): void {
+        this.native.glBindImageTexture(unit, texture, level, layered, layer, access, format);
+    }
+
+    bindProgramPipeline(pipeline: number): void {
+        this.native.glBindProgramPipeline(pipeline);
+    }
+
+    bindSampler(unit: number, sampler: number): void {
+        this.native.glBindSampler(unit, sampler);
+    }
+
+    bindTransformFeedback(target: number, id: number): void {
+        this.native.glBindTransformFeedback(target, id);
+    }
+
+    blendBarrier(): void {
+        this.native.glBlendBarrier();
+    }
+
+    blendEquationSeparatei(buf: number, modeRGB: number, modeAlpha: number): void {
+        this.native.glBlendEquationSeparatei(buf, modeRGB, modeAlpha);
+    }
+
+    blendEquationi(buf: number, mode: number): void {
+        this.native.glBlendEquationi(buf, mode);
+    }
+
+    blendFuncSeparatei(buf: number, srcRGB: number, dstRGB: number, srcAlpha: number, dstAlpha: number): void {
+        this.native.glBlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
+    }
+
+    blendFunci(buf: number, src: number, dst: number): void {
+        this.native.glBlendFunci(buf, src, dst);
+    }
+
+    clearBufferfi(buffer: number, drawbuffer: number, depth: number, stencil: number): void {
+        this.native.glClearBufferfi(buffer, drawbuffer, depth, stencil);
+    }
+
+    colorMaski(index: number, r: boolean, g: boolean, b: boolean, a: boolean): void {
+        this.native.glColorMaski(index, r, g, b, a);
+    }
+
+    copyImageSubData(srcName: number, srcTarget: number, srcLevel: number, srcX: number, srcY: number, srcZ: number, dstName: number, dstTarget: number, dstLevel: number, dstX: number, dstY: number, dstZ: number, srcWidth: number, srcHeight: number, srcDepth: number): void {
+        this.native.glCopyImageSubData(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth);
+    }
+
+    copyTexSubImage3D(target: number, level: number, xoffset: number, yoffset: number, zoffset: number, x: number, y: number, width: number, height: number): void {
+        this.native.glCopyTexSubImage3D(target, level, xoffset, yoffset, zoffset, x, y, width, height);
+    }
+
+    disablei(target: number, index: number): void {
+        this.native.glDisablei(target, index);
+    }
+
+    dispatchCompute(num_groups_x: number, num_groups_y: number, num_groups_z: number): void {
+        this.native.glDispatchCompute(num_groups_x, num_groups_y, num_groups_z);
+    }
+
+    drawArraysInstanced(mode: number, first: number, count: number, instancecount: number): void {
+        this.native.glDrawArraysInstanced(mode, first, count, instancecount);
+    }
+
+    enablei(target: number, index: number): void {
+        this.native.glEnablei(target, index);
+    }
+
+    endQuery(target: number): void {
+        this.native.glEndQuery(target);
+    }
+
+    endTransformFeedback(): void {
+        this.native.glEndTransformFeedback();
+    }
+
+    framebufferParameteri(target: number, pname: number, param: number): void {
+        this.native.glFramebufferParameteri(target, pname, param);
+    }
+
+    framebufferTexture(target: number, attachment: number, texture: number, level: number): void {
+        this.native.glFramebufferTexture(target, attachment, texture, level);
+    }
+
+    framebufferTextureLayer(target: number, attachment: number, texture: number, level: number, layer: number): void {
+        this.native.glFramebufferTextureLayer(target, attachment, texture, level, layer);
+    }
+
+    getGraphicsResetStatus(): number {
+        return this.native.glGetGraphicsResetStatus();
+    }
+
+    isEnabledi(target: number, index: number): boolean {
+        return this.native.glIsEnabledi(target, index);
+    }
+
+    isProgramPipeline(pipeline: number): boolean {
+        return this.native.glIsProgramPipeline(pipeline);
+    }
+
+    isQuery(id: number): boolean {
+        return this.native.glIsQuery(id);
+    }
+
+    isSampler(sampler: number): boolean {
+        return this.native.glIsSampler(sampler);
+    }
+
+    isTransformFeedback(id: number): boolean {
+        return this.native.glIsTransformFeedback(id);
+    }
+
+    isVertexArray(array: number): boolean {
+        return this.native.glIsVertexArray(array);
+    }
+
+    minSampleShading(value: number): void {
+        this.native.glMinSampleShading(value);
+    }
+
+    patchParameteri(pname: number, value: number): void {
+        this.native.glPatchParameteri(pname, value);
+    }
+
+    pauseTransformFeedback(): void {
+        this.native.glPauseTransformFeedback();
+    }
+
+    popDebugGroup(): void {
+        this.native.glPopDebugGroup();
+    }
+
+    primitiveBoundingBox(minX: number, minY: number, minZ: number, minW: number, maxX: number, maxY: number, maxZ: number, maxW: number): void {
+        this.native.glPrimitiveBoundingBox(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW);
+    }
+
+    programParameteri(program: number, pname: number, value: number): void {
+        this.native.glProgramParameteri(program, pname, value);
+    }
+
+    programUniform1f(program: number, location: number, v0: number): void {
+        this.native.glProgramUniform1f(program, location, v0);
+    }
+
+    programUniform1i(program: number, location: number, v0: number): void {
+        this.native.glProgramUniform1i(program, location, v0);
+    }
+
+    programUniform1ui(program: number, location: number, v0: number): void {
+        this.native.glProgramUniform1ui(program, location, v0);
+    }
+
+    programUniform2f(program: number, location: number, v0: number, v1: number): void {
+        this.native.glProgramUniform2f(program, location, v0, v1);
+    }
+
+    programUniform2i(program: number, location: number, v0: number, v1: number): void {
+        this.native.glProgramUniform2i(program, location, v0, v1);
+    }
+
+    programUniform2ui(program: number, location: number, v0: number, v1: number): void {
+        this.native.glProgramUniform2ui(program, location, v0, v1);
+    }
+
+    programUniform3f(program: number, location: number, v0: number, v1: number, v2: number): void {
+        this.native.glProgramUniform3f(program, location, v0, v1, v2);
+    }
+
+    programUniform3i(program: number, location: number, v0: number, v1: number, v2: number): void {
+        this.native.glProgramUniform3i(program, location, v0, v1, v2);
+    }
+
+    programUniform3ui(program: number, location: number, v0: number, v1: number, v2: number): void {
+        this.native.glProgramUniform3ui(program, location, v0, v1, v2);
+    }
+
+    programUniform4f(program: number, location: number, v0: number, v1: number, v2: number, v3: number): void {
+        this.native.glProgramUniform4f(program, location, v0, v1, v2, v3);
+    }
+
+    programUniform4i(program: number, location: number, v0: number, v1: number, v2: number, v3: number): void {
+        this.native.glProgramUniform4i(program, location, v0, v1, v2, v3);
+    }
+
+    programUniform4ui(program: number, location: number, v0: number, v1: number, v2: number, v3: number): void {
+        this.native.glProgramUniform4ui(program, location, v0, v1, v2, v3);
+    }
+
+    readBuffer(src: number): void {
+        this.native.glReadBuffer(src);
+    }
+
+    renderbufferStorageMultisample(target: number, samples: number, internalformat: number, width: number, height: number): void {
+        this.native.glRenderbufferStorageMultisample(target, samples, internalformat, width, height);
+    }
+
+    resumeTransformFeedback(): void {
+        this.native.glResumeTransformFeedback();
+    }
+
+    samplerParameterf(sampler: number, pname: number, param: number): void {
+        this.native.glSamplerParameterf(sampler, pname, param);
+    }
+
+    samplerParameteri(sampler: number, pname: number, param: number): void {
+        this.native.glSamplerParameteri(sampler, pname, param);
+    }
+
+    texBuffer(target: number, internalformat: number, buffer: number): void {
+        this.native.glTexBuffer(target, internalformat, buffer);
+    }
+
+    texStorage2D(target: number, levels: number, internalformat: number, width: number, height: number): void {
+        this.native.glTexStorage2D(target, levels, internalformat, width, height);
+    }
+
+    texStorage2DMultisample(target: number, samples: number, internalformat: number, width: number, height: number, fixedsamplelocations: boolean): void {
+        this.native.glTexStorage2DMultisample(target, samples, internalformat, width, height, fixedsamplelocations);
+    }
+
+    texStorage3D(target: number, levels: number, internalformat: number, width: number, height: number, depth: number): void {
+        this.native.glTexStorage3D(target, levels, internalformat, width, height, depth);
+    }
+
+    texStorage3DMultisample(target: number, samples: number, internalformat: number, width: number, height: number, depth: number, fixedsamplelocations: boolean): void {
+        this.native.glTexStorage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations);
+    }
+
+    uniform1ui(location: number, v0: number): void {
+        this.native.glUniform1ui(location, v0);
+    }
+
+    uniform2ui(location: number, v0: number, v1: number): void {
+        this.native.glUniform2ui(location, v0, v1);
+    }
+
+    uniform3ui(location: number, v0: number, v1: number, v2: number): void {
+        this.native.glUniform3ui(location, v0, v1, v2);
+    }
+
+    uniform4ui(location: number, v0: number, v1: number, v2: number, v3: number): void {
+        this.native.glUniform4ui(location, v0, v1, v2, v3);
+    }
+
+    uniformBlockBinding(program: number, uniformBlockIndex: number, uniformBlockBinding: number): void {
+        this.native.glUniformBlockBinding(program, uniformBlockIndex, uniformBlockBinding);
+    }
+
+    unmapBuffer(target: number): boolean {
+        return this.native.glUnmapBuffer(target);
+    }
+
+    validateProgramPipeline(pipeline: number): void {
+        this.native.glValidateProgramPipeline(pipeline);
+    }
+
+    vertexAttribBinding(attribindex: number, bindingindex: number): void {
+        this.native.glVertexAttribBinding(attribindex, bindingindex);
+    }
+
+    vertexAttribDivisor(index: number, divisor: number): void {
+        this.native.glVertexAttribDivisor(index, divisor);
+    }
+
+    vertexAttribFormat(attribindex: number, size: number, type: number, normalized: boolean, relativeoffset: number): void {
+        this.native.glVertexAttribFormat(attribindex, size, type, normalized, relativeoffset);
+    }
+
+    vertexAttribI4i(index: number, x: number, y: number, z: number, w: number): void {
+        this.native.glVertexAttribI4i(index, x, y, z, w);
+    }
+
+    vertexAttribI4ui(index: number, x: number, y: number, z: number, w: number): void {
+        this.native.glVertexAttribI4ui(index, x, y, z, w);
+    }
+
+    vertexAttribIFormat(attribindex: number, size: number, type: number, relativeoffset: number): void {
+        this.native.glVertexAttribIFormat(attribindex, size, type, relativeoffset);
+    }
+
+    vertexBindingDivisor(bindingindex: number, divisor: number): void {
+        this.native.glVertexBindingDivisor(bindingindex, divisor);
+    }
 }
