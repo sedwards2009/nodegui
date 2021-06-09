@@ -10,7 +10,8 @@ Napi::Object QSurfaceFormatWrap::init(Napi::Env env, Napi::Object exports) {
   char CLASSNAME[] = "QSurfaceFormat";
   Napi::Function func = DefineClass(
       env, CLASSNAME,
-      {InstanceMethod("setDepthBufferSize",
+       {InstanceMethod("profile", &QSurfaceFormatWrap::profile),
+       InstanceMethod("setDepthBufferSize",
                       &QSurfaceFormatWrap::setDepthBufferSize),
        InstanceMethod("setMajorVersion", &QSurfaceFormatWrap::setMajorVersion),
        InstanceMethod("setMinorVersion", &QSurfaceFormatWrap::setMinorVersion),
@@ -36,7 +37,11 @@ QSurfaceFormatWrap::QSurfaceFormatWrap(const Napi::CallbackInfo& info)
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
-  this->instance = new QSurfaceFormat();
+  if (info.Length() == 1 && info[0].IsExternal()) {
+    this->instance = info[0].As<Napi::External<QSurfaceFormat>>().Data();
+  } else {
+    this->instance = new QSurfaceFormat();
+  }
   this->rawData = extrautils::configureComponent(this->getInternalInstance());
 }
 
@@ -66,7 +71,6 @@ Napi::Value QSurfaceFormatWrap::profile(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
-  int profile = info[0].As<Napi::Number>().Int32Value();
   return Napi::Number::New(env, this->instance->profile());
 }
 
@@ -104,10 +108,6 @@ Napi::Value StaticQSurfaceFormatWrapMethods::defaultFormat(
     const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
-
-  Napi::Object surfaceFormatObject = info[0].As<Napi::Object>();
-  QSurfaceFormatWrap* surfaceFormatWrap =
-      Napi::ObjectWrap<QSurfaceFormatWrap>::Unwrap(surfaceFormatObject);
 
   auto instance = QSurfaceFormatWrap::constructor.New(
       {Napi::External<QSurfaceFormat>::New(env, new QSurfaceFormat(QSurfaceFormat::defaultFormat()))});

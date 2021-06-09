@@ -43,6 +43,6 @@ export class QSurfaceFormat extends Component {
     }
 
     static defaultFormat(): QSurfaceFormat {
-        return new QSurfaceFormat(addon.QSurfaceFormat.getDefaultFormat());
+        return new QSurfaceFormat(addon.QSurfaceFormat.defaultFormat());
     }
 }

@@ -37,6 +37,10 @@ Napi::Object QOpenGLExtraFunctionsWrap::init(Napi::Env env,
        InstanceMethod("glUniform2iv", &QOpenGLExtraFunctionsWrap::glUniform2iv),
        InstanceMethod("glUniform3iv", &QOpenGLExtraFunctionsWrap::glUniform3iv),
        InstanceMethod("glUniform4iv", &QOpenGLExtraFunctionsWrap::glUniform4iv),
+       InstanceMethod("glUniformMatrix2fv", &QOpenGLExtraFunctionsWrap::glUniformMatrix2fv),
+       InstanceMethod("glUniformMatrix3fv", &QOpenGLExtraFunctionsWrap::glUniformMatrix3fv),
+       InstanceMethod("glUniformMatrix4fv", &QOpenGLExtraFunctionsWrap::glUniformMatrix4fv),
+
        InstanceMethod("glUseProgram", &QOpenGLExtraFunctionsWrap::glUseProgram),
        InstanceMethod("glVertexAttribPointer",
                       &QOpenGLExtraFunctionsWrap::glVertexAttribPointer),
@@ -449,12 +453,12 @@ Napi::Value QOpenGLExtraFunctionsWrap::glVertexAttribPointer(
   }
 
   GLuint index = info[0].As<Napi::Number>().Uint32Value();
-  GLint size = info[1].As<Napi::Number>().Uint32Value();
+  GLint size = info[1].As<Napi::Number>().Int32Value();
   GLenum type = info[2].As<Napi::Number>().Uint32Value();
-  GLboolean normalized = info[3].As<Napi::Boolean>().ToBoolean();
-  GLsizei stride = info[4].As<Napi::Number>().Uint32Value();
+  bool normalized = info[3].As<Napi::Boolean>().ToBoolean();
+  GLsizei stride = info[4].As<Napi::Number>().Int32Value();
   uint pointer_offset = info[5].As<Napi::Number>().Uint32Value();
-  this->instance->glVertexAttribPointer(index, size, type, normalized, stride,
+  this->instance->glVertexAttribPointer(index, size, type, normalized ? GL_TRUE : GL_FALSE, stride,
                                         reinterpret_cast<void *>(pointer_offset));
   return env.Null();
 }
@@ -554,7 +558,7 @@ Napi::Value QOpenGLExtraFunctionsWrap::glUniform4fv(
   this->instance->glUniform4fv(location, count, static_cast<const GLfloat *>(data.Data()));
   return env.Null();
 }
-//---
+
 Napi::Value QOpenGLExtraFunctionsWrap::glUniform1iv(
     const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
@@ -932,8 +936,8 @@ Napi::Value QOpenGLExtraFunctionsWrap::glDepthMask(const Napi::CallbackInfo& inf
     Napi::TypeError::New(env, "Wrong number of arguments")
         .ThrowAsJavaScriptException();
   }
-  GLboolean flag = info[0].As<Napi::Boolean>().Value();
-  this->instance->glDepthMask(flag);
+  bool flag = info[0].As<Napi::Boolean>().Value();
+  this->instance->glDepthMask(flag ? GL_TRUE : GL_FALSE);
   return env.Null();
 }
 
@@ -2633,5 +2637,59 @@ Napi::Value QOpenGLExtraFunctionsWrap::glVertexBindingDivisor(const Napi::Callba
   GLuint bindingindex = info[0].As<Napi::Number>().Uint32Value();
   GLuint divisor = info[1].As<Napi::Number>().Uint32Value();
   this->instance->glVertexBindingDivisor(bindingindex, divisor);
+  return env.Null();
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glUniformMatrix2fv(
+    const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 4) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+  }
+
+  GLint location = info[0].As<Napi::Number>().Int32Value();
+  GLsizei count = info[1].As<Napi::Number>().Int32Value();
+  bool transpose = info[2].As<Napi::Boolean>().Value();
+  Napi::ArrayBuffer data = info[3].As<Napi::ArrayBuffer>();
+  this->instance->glUniformMatrix2fv(location, count, transpose ? GL_TRUE : GL_FALSE, static_cast<const GLfloat *>(data.Data()));
+  return env.Null();
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glUniformMatrix3fv(
+    const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 4) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+  }
+
+  GLint location = info[0].As<Napi::Number>().Int32Value();
+  GLsizei count = info[1].As<Napi::Number>().Int32Value();
+  bool transpose = info[2].As<Napi::Boolean>().Value();
+  Napi::ArrayBuffer data = info[3].As<Napi::ArrayBuffer>();
+  this->instance->glUniformMatrix3fv(location, count, transpose ? GL_TRUE : GL_FALSE, static_cast<const GLfloat *>(data.Data()));
+  return env.Null();
+}
+
+Napi::Value QOpenGLExtraFunctionsWrap::glUniformMatrix4fv(
+    const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  if (info.Length() != 4) {
+    Napi::TypeError::New(env, "Wrong number of arguments")
+        .ThrowAsJavaScriptException();
+  }
+
+  GLint location = info[0].As<Napi::Number>().Int32Value();
+  GLsizei count = info[1].As<Napi::Number>().Int32Value();
+  bool transpose = info[2].As<Napi::Boolean>().Value();
+  Napi::ArrayBuffer data = info[3].As<Napi::ArrayBuffer>();
+  this->instance->glUniformMatrix4fv(location, count, transpose ? GL_TRUE : GL_FALSE, static_cast<const GLfloat *>(data.Data()));
   return env.Null();
 }

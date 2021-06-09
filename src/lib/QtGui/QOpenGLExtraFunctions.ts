@@ -1142,4 +1142,49 @@ export class QOpenGLExtraFunctions extends Component {
     vertexBindingDivisor(bindingindex: number, divisor: number): void {
         this.native.glVertexBindingDivisor(bindingindex, divisor);
     }
+
+    uniformMatrix2fv(location: number, count: number, transpose: boolean, data: number[] | Float32Array): void {
+        let buffer: ArrayBuffer;
+        if (isTypedArray(data)) {
+            buffer = data.buffer;
+        } else {
+            buffer = Float32Array.from(data).buffer;
+        }
+
+        if (count > buffer.byteLength / (2*2 * Float32Array.BYTES_PER_ELEMENT)) {
+            throw new Error(`Parameter 'count' to uniformMatrix2fv() specifies more data than is available in parameter 'data'.`);
+        }
+
+        this.native.glUniformMatrix2fv(location, count, transpose, buffer);
+    }
+
+    uniformMatrix3fv(location: number, count: number, transpose: boolean, data: number[] | Float32Array): void {
+        let buffer: ArrayBuffer;
+        if (isTypedArray(data)) {
+            buffer = data.buffer;
+        } else {
+            buffer = Float32Array.from(data).buffer;
+        }
+
+        if (count > buffer.byteLength / (3*3 * Float32Array.BYTES_PER_ELEMENT)) {
+            throw new Error(`Parameter 'count' to uniformMatrix3fv() specifies more data than is available in parameter 'data'.`);
+        }
+
+        this.native.glUniformMatrix3fv(location, count, transpose, buffer);
+    }
+
+    uniformMatrix4fv(location: number, count: number, transpose: boolean, data: number[] | Float32Array): void {
+        let buffer: ArrayBuffer;
+        if (isTypedArray(data)) {
+            buffer = data.buffer;
+        } else {
+            buffer = Float32Array.from(data).buffer;
+        }
+
+        if (count > buffer.byteLength / (4*4 * Float32Array.BYTES_PER_ELEMENT)) {
+            throw new Error(`Parameter 'count' to uniformMatrix4fv() specifies more data than is available in parameter 'data'.`);
+        }
+
+        this.native.glUniformMatrix4fv(location, count, transpose, buffer);
+    }
 }

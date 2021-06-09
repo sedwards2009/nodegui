@@ -25,6 +25,7 @@ Napi::Object QOpenGLShaderProgramWrap::init(Napi::Env env,
        InstanceMethod("enableAttributeArray",
                       &QOpenGLShaderProgramWrap::enableAttributeArray),
        InstanceMethod("link", &QOpenGLShaderProgramWrap::link),
+       InstanceMethod("log", &QOpenGLShaderProgramWrap::log),
        InstanceMethod("programId", &QOpenGLShaderProgramWrap::programId),
        InstanceMethod("release", &QOpenGLShaderProgramWrap::release),
        InstanceMethod("setAttributeBuffer",
@@ -178,6 +179,13 @@ Napi::Value QOpenGLShaderProgramWrap::uniformLocation(
       QString::fromStdString(info[0].As<Napi::String>().Utf8Value());
   auto result = this->instance->attributeLocation(uniform);
   return Napi::Number::New(env, result);
+}
+
+Napi::Value QOpenGLShaderProgramWrap::log(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
+  return Napi::String::New(env, this->instance->log().toStdString());
 }
 
 Napi::Value QOpenGLShaderProgramWrap::setUniformValue1i(

@@ -143,9 +143,10 @@ Napi::Value glUniform3fv(const Napi::CallbackInfo& info);
 Napi::Value glUniform3iv(const Napi::CallbackInfo& info);
 Napi::Value glUniform4fv(const Napi::CallbackInfo& info);
 Napi::Value glUniform4iv(const Napi::CallbackInfo& info);
-//void 	 glUniformMatrix2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
-//void 	 glUniformMatrix3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
-//void 	 glUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+Napi::Value glUniformMatrix2fv(const Napi::CallbackInfo& info);
+Napi::Value glUniformMatrix3fv(const Napi::CallbackInfo& info);
+Napi::Value glUniformMatrix4fv(const Napi::CallbackInfo& info);
+
 Napi::Value glUseProgram(const Napi::CallbackInfo& info);
   Napi::Value glValidateProgram(const Napi::CallbackInfo& info);
   Napi::Value glVertexAttrib1f(const Napi::CallbackInfo& info);

@@ -23,6 +23,10 @@ export class QOpenGLShaderProgram extends Component {
         return this.native.addShaderFromSourceCode(type, source);
     }
 
+    log(): string {
+        return this.native.log();
+    }
+
 // Remove, use QOpenGLFunctions
     bindAttributeLocation(name: string, location: number): void {
         this.native.bindAttributeLocation(name, location);

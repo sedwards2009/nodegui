@@ -41,7 +41,7 @@ export class QOpenGLBuffer extends Component {
         this.native.release();
     }
 
-    write(offset: number, arrayBuffer: ArrayBuffer | NodeJS.TypedArray, count: number): void {
+    write(offset: number, arrayBuffer: ArrayBuffer | NodeJS.TypedArray, countBytes: number): void {
         let buffer: ArrayBuffer;
         let size = 0;
         if (isTypedArray(arrayBuffer)) {
@@ -51,10 +51,10 @@ export class QOpenGLBuffer extends Component {
             buffer = arrayBuffer;
             size = arrayBuffer.byteLength;
         }
-        if (count > size) {
+        if (countBytes > size) {
             throw new Error('Argument "count" to QOpenGLBuffer.write() can\'t be bigger than the buffer size.');
         }
-        this.native.write(offset, buffer, count);
+        this.native.write(offset, buffer, countBytes);
     }
 
     size(): number {
