@@ -17,7 +17,7 @@ Napi::Object QOpenGLBufferWrap::init(Napi::Env env, Napi::Object exports) {
                    InstanceMethod("destroy", &QOpenGLBufferWrap::destroy),
                    InstanceMethod("release", &QOpenGLBufferWrap::release),
                    InstanceMethod("size", &QOpenGLBufferWrap::size),
-                   InstanceMethod("write", &QOpenGLBufferWrap::release),
+                   InstanceMethod("write", &QOpenGLBufferWrap::write),
                    COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QOpenGLBufferWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);

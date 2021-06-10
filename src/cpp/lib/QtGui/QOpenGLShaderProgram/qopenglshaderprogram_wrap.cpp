@@ -53,13 +53,20 @@ QOpenGLShaderProgramWrap::QOpenGLShaderProgramWrap(
   Napi::HandleScope scope(env);
 
   if (info.Length() == 1) {
-    Napi::Object parentObject = info[0].As<Napi::Object>();
-    QObjectWrap* parentObjectWrap =
-        Napi::ObjectWrap<QObjectWrap>::Unwrap(parentObject);
-    this->instance =
-        new QOpenGLShaderProgram(parentObjectWrap->getInternalInstance());
+    if (info[0].IsExternal()) {
+      this->instance = info[0].As<Napi::External<QOpenGLShaderProgram>>().Data();
+      ownInstance = false;
+    } else {
+      Napi::Object parentObject = info[0].As<Napi::Object>();
+      QObjectWrap* parentObjectWrap =
+          Napi::ObjectWrap<QObjectWrap>::Unwrap(parentObject);
+      this->instance =
+          new QOpenGLShaderProgram(parentObjectWrap->getInternalInstance());
+      ownInstance = true;
+    }
   } else if (info.Length() == 0) {
     this->instance = new QOpenGLShaderProgram();
+    ownInstance = true;
   } else {
     Napi::TypeError::New(env,
                          "Wrong number of arguments to "
@@ -70,7 +77,9 @@ QOpenGLShaderProgramWrap::QOpenGLShaderProgramWrap(
 }
 
 QOpenGLShaderProgramWrap::~QOpenGLShaderProgramWrap() {
-  extrautils::safeDelete(this->instance);
+  if (ownInstance) {
+    extrautils::safeDelete(this->instance);
+  }
 }
 
 Napi::Value QOpenGLShaderProgramWrap::addShader(
@@ -177,7 +186,7 @@ Napi::Value QOpenGLShaderProgramWrap::uniformLocation(
 
   QString uniform =
       QString::fromStdString(info[0].As<Napi::String>().Utf8Value());
-  auto result = this->instance->attributeLocation(uniform);
+  int result = this->instance->uniformLocation(uniform);
   return Napi::Number::New(env, result);
 }
 

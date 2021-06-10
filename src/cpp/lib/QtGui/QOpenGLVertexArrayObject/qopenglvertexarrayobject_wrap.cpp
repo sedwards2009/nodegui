@@ -32,13 +32,20 @@ QOpenGLVertexArrayObjectWrap::QOpenGLVertexArrayObjectWrap(
   Napi::HandleScope scope(env);
 
   if (info.Length() == 1) {
-    Napi::Object parentObject = info[0].As<Napi::Object>();
-    QObjectWrap* parentObjectWrap =
-        Napi::ObjectWrap<QObjectWrap>::Unwrap(parentObject);
-    this->instance =
-        new QOpenGLVertexArrayObject(parentObjectWrap->getInternalInstance());
+    if (info[0].IsExternal()) {
+      this->instance = info[0].As<Napi::External<QOpenGLVertexArrayObject>>().Data();
+      ownInstance = false;
+    } else {
+      Napi::Object parentObject = info[0].As<Napi::Object>();
+      QObjectWrap* parentObjectWrap =
+          Napi::ObjectWrap<QObjectWrap>::Unwrap(parentObject);
+      this->instance =
+          new QOpenGLVertexArrayObject(parentObjectWrap->getInternalInstance());
+      ownInstance = true;
+    }
   } else if (info.Length() == 0) {
     this->instance = new QOpenGLVertexArrayObject();
+    ownInstance = true;
   } else {
     Napi::TypeError::New(env,
                          "Wrong number of arguments to "
@@ -49,7 +56,9 @@ QOpenGLVertexArrayObjectWrap::QOpenGLVertexArrayObjectWrap(
 }
 
 QOpenGLVertexArrayObjectWrap::~QOpenGLVertexArrayObjectWrap() {
-  extrautils::safeDelete(this->instance);
+  if (ownInstance) {
+    extrautils::safeDelete(this->instance);
+  }
 }
 
 Napi::Value QOpenGLVertexArrayObjectWrap::bind(const Napi::CallbackInfo& info) {

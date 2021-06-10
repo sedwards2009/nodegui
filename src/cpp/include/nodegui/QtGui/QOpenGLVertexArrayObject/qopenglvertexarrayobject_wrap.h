@@ -14,6 +14,7 @@ class DLL_EXPORT QOpenGLVertexArrayObjectWrap
 
  private:
   QPointer<QOpenGLVertexArrayObject> instance;
+  bool ownInstance;
 
  public:
   static Napi::Object init(Napi::Env env, Napi::Object exports);
